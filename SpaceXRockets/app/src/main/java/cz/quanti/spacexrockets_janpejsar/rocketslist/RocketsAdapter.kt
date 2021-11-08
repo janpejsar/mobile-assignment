@@ -1,4 +1,4 @@
-package cz.quanti.spacexrockets_janpejsar
+package cz.quanti.spacexrockets_janpejsar.rocketslist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import cz.quanti.spacexrockets_janpejsar.R
 import cz.quanti.spacexrockets_janpejsar.databinding.ItemRocketBinding
 import cz.quanti.spacexrockets_janpejsar.entities.Rocket
 
@@ -13,7 +14,8 @@ class RocketsAdapter: ListAdapter<Rocket, RocketsAdapter.RocketViewHolder>(DIFF_
     var onItemClickListener: ((item: Rocket) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RocketViewHolder {
-        return RocketViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_rocket, parent, false))
+        return RocketViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context),
+            R.layout.item_rocket, parent, false))
     }
 
     override fun onBindViewHolder(holder: RocketViewHolder, position: Int) {

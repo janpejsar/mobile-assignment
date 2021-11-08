@@ -1,4 +1,4 @@
-package cz.quanti.spacexrockets_janpejsar
+package cz.quanti.spacexrockets_janpejsar.rocketslist
 
 import android.app.Application
 import android.util.Log
