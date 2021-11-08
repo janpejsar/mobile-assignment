@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/rocketListFragment">
+
+    <fragment
+        android:id="@+id/rocketListFragment"
+        android:name="cz.quanti.spacexrockets_janpejsar.RocketListFragment"
+        android:label="@string/fragment_rocket_list"
+        tools:layout="@layout/fragment_rocket_list" >
+        <action
+            android:id="@+id/action_rocketListFragment_to_rocketDetailFragment"
+            app:destination="@id/rocketDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/rocketDetailFragment"
+        android:name="cz.quanti.spacexrockets_janpejsar.RocketDetailFragment"
+        android:label="@string/fragment_rocket_detail"
+        tools:layout="@layout/fragment_rocket_detail" />
+</navigation>

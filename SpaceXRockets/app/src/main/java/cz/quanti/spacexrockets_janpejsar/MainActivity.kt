@@ -1,39 +1,23 @@
 package cz.quanti.spacexrockets_janpejsar
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import cz.quanti.spacexrockets_janpejsar.entities.Rocket
-import cz.quanti.spacexrockets_janpejsar.repositories.ProductionSpaceXRepository
-import java.lang.StringBuilder
+import android.view.View
+import androidx.databinding.DataBindingUtil
+import com.google.android.material.appbar.MaterialToolbar
+import cz.quanti.spacexrockets_janpejsar.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var viewModel: RocketListViewModel
+class MainActivity : NavigationActivity() {
+    private lateinit var binding: ActivityMainBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val repository = ProductionSpaceXRepository()
-        repository.getRockets(this::success, this::failure)
+    override fun onCreateBeforeNavigationSetup(savedInstanceState: Bundle?) {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
     }
 
-    private fun success(rockets: List<Rocket>?) {
-        Log.i(TAG, "onResponse: Success! :) Got ${rockets?.size} rockets")
-        viewModel.rockets.value = rockets
-
-        if (rockets != null) {
-            val builder = StringBuilder("Rocket list:")
-            rockets.forEachIndexed { index, rocket -> builder.append("\n${index + 1}.\t${rocket.name}") }
-            Log.i(TAG, "printRockets: $builder")
-        }
+    override fun getToolbar(): MaterialToolbar {
+        return binding.mainToolbar
     }
 
-    private fun failure(t: Throwable?) {
-        Log.e(TAG, "failure: Failed", t)
-    }
-
-    companion object {
-        private const val TAG = "MainActivity"
+    override fun getNavHostFragment(): View {
+        return findViewById(R.id.navHost)
     }
 }

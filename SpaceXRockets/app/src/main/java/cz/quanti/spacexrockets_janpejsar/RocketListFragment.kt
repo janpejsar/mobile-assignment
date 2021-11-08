@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.quanti.spacexrockets_janpejsar.databinding.FragmentRocketListBinding
 import cz.quanti.spacexrockets_janpejsar.entities.Rocket
@@ -44,5 +45,6 @@ class RocketListFragment: Fragment() {
 
     private fun showRocketDetail(rocket: Rocket) {
         Log.d("TAG", "showRocketDetail: ${rocket.name}: ${rocket.description}")
+        findNavController().navigate(RocketListFragmentDirections.actionRocketListFragmentToRocketDetailFragment())
     }
 }
