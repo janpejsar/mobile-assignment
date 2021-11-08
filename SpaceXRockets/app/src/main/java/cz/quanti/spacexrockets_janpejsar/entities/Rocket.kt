@@ -1,17 +1,22 @@
 package cz.quanti.spacexrockets_janpejsar.entities
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class Rocket(
+    @field:Json(name="id")
     val id: String,
-    @SerializedName("name")
+    @field:Json(name="name")
     val rocketName: String,
+    @field:Json(name="description")
     val description: String,
+    @field:Json(name="height")
     val height: Dimension,
+    @field:Json(name="diameter")
     val diameter: Dimension,
+    @field:Json(name="mass")
     val mass: Mass,
-    @SerializedName("first_stage")
+    @field:Json(name="first_stage")
     val firstStage: Stage,
-    @SerializedName("second_stage")
+    @field:Json(name="second_stage")
     val secondStage: Stage
 )

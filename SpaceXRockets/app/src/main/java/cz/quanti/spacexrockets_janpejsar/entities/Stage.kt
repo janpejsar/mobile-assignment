@@ -1,12 +1,14 @@
 package cz.quanti.spacexrockets_janpejsar.entities
 
-import com.google.gson.annotations.SerializedName
+import com.squareup.moshi.Json
 
 data class Stage(
+    @field:Json(name="reusable")
     val reusable: Boolean,
+    @field:Json(name="engines")
     val engines: Int,
-    @SerializedName("fuel_amount_tons")
+    @field:Json(name="fuel_amount_tons")
     val fuelAmount: Float,
-    @SerializedName("burn_time_sec")
-    val burnTime: Int
+    @field:Json(name="burn_time_sec")
+    val burnTime: Int?
 )

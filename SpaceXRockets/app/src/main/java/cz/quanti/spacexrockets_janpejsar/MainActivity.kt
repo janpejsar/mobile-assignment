@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun printRockets(rockets: List<Rocket>) {
         val builder = StringBuilder("Rocket list:")
-        rockets.forEachIndexed { index, rocket -> builder.append("\n${index + 1}.\t${rocket.rocketName}") }
+        rockets.forEachIndexed { index, rocket -> builder.append("\n${index + 1}.\t${rocket.rocketName} \t\t${rocket.firstStage.burnTime}") }
         Log.i(TAG, "printRockets: $builder")
     }
 }
