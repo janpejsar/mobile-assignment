@@ -8,10 +8,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import cz.quanti.spacexrockets_janpejsar.R
 import cz.quanti.spacexrockets_janpejsar.databinding.ItemRocketBinding
-import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.Rocket
 
-class RocketsAdapter: ListAdapter<Rocket, RocketsAdapter.RocketViewHolder>(DIFF_CALLBACK) {
-    var onItemClickListener: ((item: Rocket) -> Unit)? = null
+class RocketsAdapter: ListAdapter<RocketItem, RocketsAdapter.RocketViewHolder>(DIFF_CALLBACK) {
+    var onItemClickListener: ((item: RocketItem) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RocketViewHolder {
         return RocketViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context),
@@ -31,12 +30,12 @@ class RocketsAdapter: ListAdapter<Rocket, RocketsAdapter.RocketViewHolder>(DIFF_
     }
 
     companion object {
-        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<Rocket>() {
-            override fun areItemsTheSame(oldItem: Rocket, newItem: Rocket): Boolean {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<RocketItem>() {
+            override fun areItemsTheSame(oldItem: RocketItem, newItem: RocketItem): Boolean {
                 return oldItem.id == newItem.id
             }
 
-            override fun areContentsTheSame(oldItem: Rocket, newItem: Rocket): Boolean {
+            override fun areContentsTheSame(oldItem: RocketItem, newItem: RocketItem): Boolean {
                 return oldItem == newItem
             }
 

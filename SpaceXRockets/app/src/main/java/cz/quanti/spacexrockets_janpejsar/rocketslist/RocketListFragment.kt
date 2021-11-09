@@ -38,14 +38,17 @@ class RocketListFragment: Fragment() {
 
         viewModel.rocketsLiveData.observe(viewLifecycleOwner, {
             Log.i("TAG", "onCreateView: Submitting ${it?.size} rockets")
-            adapter.submitList(it)
+
+            val items = ArrayList<RocketItem>()
+            it.forEach { rocket: Rocket -> items.add(RocketItem(rocket)) }
+            adapter.submitList(items)
         })
 
         return binding.root
     }
 
-    private fun showRocketDetail(rocket: Rocket) {
-        Log.d("TAG", "showRocketDetail: ${rocket.name}: ${rocket.description}")
+    private fun showRocketDetail(rocket: RocketItem) {
+        Log.d("TAG", "showRocketDetail: ${rocket.name}")
         findNavController().navigate(RocketListFragmentDirections.actionRocketListFragmentToRocketDetailFragment())
     }
 }

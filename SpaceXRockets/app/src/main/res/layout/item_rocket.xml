@@ -36,6 +36,6 @@
     <data>
         <variable
             name="rocket"
-            type="cz.quanti.spacexrockets_janpejsar.spacexapi.entities.Rocket" />
+            type="cz.quanti.spacexrockets_janpejsar.rocketslist.RocketItem" />
     </data>
 </layout>
