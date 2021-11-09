@@ -7,7 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.Rocket
-import cz.quanti.spacexrockets_janpejsar.repositories.ProductionSpaceXRepository
+import cz.quanti.spacexrockets_janpejsar.repositories.SpaceXRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ import java.lang.StringBuilder
 import javax.inject.Inject
 
 @HiltViewModel
-class RocketListViewModel @Inject constructor(application: Application, val repository: ProductionSpaceXRepository): AndroidViewModel(application) {
+class RocketListViewModel @Inject constructor(application: Application, private val repository: SpaceXRepository): AndroidViewModel(application) {
     private val _rocketsLiveData = MutableLiveData<List<Rocket>>()
     val rocketsLiveData: LiveData<List<Rocket>> by ::_rocketsLiveData
 
