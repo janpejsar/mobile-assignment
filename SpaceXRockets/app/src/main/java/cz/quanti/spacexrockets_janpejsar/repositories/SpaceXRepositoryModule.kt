@@ -1,4 +1,4 @@
-package cz.quanti.spacexrockets_janpejsar.spacexapi.repositories
+package cz.quanti.spacexrockets_janpejsar.repositories
 
 import dagger.Binds
 import dagger.Module

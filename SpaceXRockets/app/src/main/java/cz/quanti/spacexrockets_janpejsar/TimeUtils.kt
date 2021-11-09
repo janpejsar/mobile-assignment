@@ -12,9 +12,9 @@ class TimeUtils {
         }
 
         @JvmStatic
-        fun fromApiStringDate(string: String): Date? {
+        fun fromApiStringDate(string: String): Date {
             val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            return format.parse(string)
+            return format.parse(string) ?: Date()
         }
 
         @JvmStatic

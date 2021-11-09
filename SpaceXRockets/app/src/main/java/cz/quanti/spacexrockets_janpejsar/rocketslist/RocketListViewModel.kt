@@ -5,19 +5,22 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.Rocket
-import cz.quanti.spacexrockets_janpejsar.spacexapi.repositories.ProductionSpaceXRepository
+import cz.quanti.spacexrockets_janpejsar.repositories.ProductionSpaceXRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.lang.StringBuilder
 import javax.inject.Inject
 
 @HiltViewModel
-class RocketListViewModel @Inject constructor(application: Application, repository: ProductionSpaceXRepository): AndroidViewModel(application) {
+class RocketListViewModel @Inject constructor(application: Application, val repository: ProductionSpaceXRepository): AndroidViewModel(application) {
     private val _rocketsLiveData = MutableLiveData<List<Rocket>>()
     val rocketsLiveData: LiveData<List<Rocket>> by ::_rocketsLiveData
 
     init {
-        repository.getRockets(this::success, this::failure)
+        repository.getRocketsFromAPI(this::success, this::failure)
     }
 
     private fun success(rockets: List<Rocket>?) {
@@ -28,6 +31,13 @@ class RocketListViewModel @Inject constructor(application: Application, reposito
             val builder = StringBuilder("Rocket list:")
             rockets.forEachIndexed { index, rocket -> builder.append("\n${index + 1}.\t${rocket.name}") }
             Log.i(TAG, "printRockets: $builder")
+
+            viewModelScope.launch(Dispatchers.IO) {
+                repository.saveRocketsToDatabase(
+                    getApplication(),
+                    rockets
+                )
+            }
         }
     }
 
