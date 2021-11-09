@@ -6,22 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import cz.quanti.spacexrockets_janpejsar.R
 import cz.quanti.spacexrockets_janpejsar.databinding.FragmentRocketDetailBinding
 
 class RocketDetailFragment: Fragment() {
     private lateinit var binding: FragmentRocketDetailBinding
-    private lateinit var viewModel: RocketDetailViewModel
+    private val viewModel: RocketDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val provider = ViewModelProvider(this)
-        viewModel = provider.get(RocketDetailViewModel::class.java)
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rocket_detail, container, false)
 
         return binding.root

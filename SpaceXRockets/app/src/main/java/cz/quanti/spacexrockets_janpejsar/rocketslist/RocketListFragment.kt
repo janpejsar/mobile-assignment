@@ -7,16 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.quanti.spacexrockets_janpejsar.R
 import cz.quanti.spacexrockets_janpejsar.databinding.FragmentRocketListBinding
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.Rocket
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RocketListFragment: Fragment() {
     private lateinit var binding: FragmentRocketListBinding
-    private lateinit var viewModel: RocketListViewModel
+    private val viewModel: RocketListViewModel by viewModels()
     private val adapter = RocketsAdapter()
 
     override fun onCreateView(
@@ -24,8 +26,6 @@ class RocketListFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val provider = ViewModelProvider(this)
-        val viewModel = provider.get(RocketListViewModel::class.java)
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rocket_list, container, false)
         binding.viewModel = viewModel

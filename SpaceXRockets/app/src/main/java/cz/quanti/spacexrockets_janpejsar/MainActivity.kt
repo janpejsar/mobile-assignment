@@ -5,7 +5,9 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.appbar.MaterialToolbar
 import cz.quanti.spacexrockets_janpejsar.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : NavigationActivity() {
     private lateinit var binding: ActivityMainBinding
 
