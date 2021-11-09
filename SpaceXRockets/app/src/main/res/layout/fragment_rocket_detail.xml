@@ -2,20 +2,242 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/rocketName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:text="@{viewModel.rocketLiveData.name}"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.33" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.67" />
+
+            <TextView
+                android:id="@+id/overviewLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/overview"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+                app:layout_constraintBottom_toTopOf="@id/overviewTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/overviewTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/overviewLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@{viewModel.rocketLiveData.description}"
+                android:layout_margin="10dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+            <TextView
+                android:id="@+id/parametersLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/overviewTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/parameters"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_margin="10dp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/heightCardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/parametersLabel"
+                app:layout_constraintEnd_toStartOf="@id/guidelineStart"
+                app:cardBackgroundColor="?colorSecondary"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="?colorOnSecondary"
+                        android:layout_marginBottom="10dp"
+                        app:autoSizeTextType="uniform"
+                        android:lines="1"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                        app:dimension="@{viewModel.rocketLiveData.height}" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="?colorOnSecondary"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:text="@string/height" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/diameterCardView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/parametersLabel"
+                app:layout_constraintEnd_toStartOf="@id/guidelineEnd"
+                app:cardBackgroundColor="?colorSecondary"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="?colorOnSecondary"
+                        android:layout_marginBottom="10dp"
+                        app:autoSizeTextType="uniform"
+                        android:lines="1"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                        app:dimension="@{viewModel.rocketLiveData.diameter}" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="?colorOnSecondary"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:text="@string/diameter" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@id/guidelineEnd"
+                app:layout_constraintTop_toBottomOf="@id/parametersLabel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:cardBackgroundColor="?colorSecondary"
+                app:cardCornerRadius="10dp"
+                android:layout_margin="10dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="?colorOnSecondary"
+                        android:layout_marginBottom="10dp"
+                        app:autoSizeTextType="uniform"
+                        android:lines="1"
+                        android:gravity="center"
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4"
+                        app:mass="@{viewModel.rocketLiveData.mass}" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="?colorOnSecondary"
+                        android:gravity="center"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                        android:text="@string/mass" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/heightCardView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_margin="10dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/first_stage"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        app:drawableStartCompat="@drawable/ic_reusable"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="5dp"
+                        app:reusable="@{viewModel.rocketLiveData.firstStage.reusable}"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        app:drawableStartCompat="@drawable/ic_engine"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="5dp"
+                        app:text="@{@plurals/engines_count(viewModel.rocketLiveData.firstStage.engines)}"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        app:drawableStartCompat="@drawable/ic_fuel"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="5dp"
+                        android:text="@{@string/tons_of_fuel(viewModel.rocketLiveData.firstStage.fuelAmount)}"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                        app:drawableStartCompat="@drawable/ic_burn_time"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="5dp"
+                        android:text="@{@string/seconds_burn_time(viewModel.rocketLiveData.firstStage.burnTime)}"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
     <data>
         <variable
