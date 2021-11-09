@@ -12,11 +12,9 @@ import java.lang.StringBuilder
 import javax.inject.Inject
 
 @HiltViewModel
-class RocketListViewModel @Inject constructor(application: Application): AndroidViewModel(application) {
+class RocketListViewModel @Inject constructor(application: Application, repository: ProductionSpaceXRepository): AndroidViewModel(application) {
     private val _rocketsLiveData = MutableLiveData<List<Rocket>>()
     val rocketsLiveData: LiveData<List<Rocket>> by ::_rocketsLiveData
-
-    var repository: ProductionSpaceXRepository = ProductionSpaceXRepository()
 
     init {
         repository.getRockets(this::success, this::failure)

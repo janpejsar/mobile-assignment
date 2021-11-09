@@ -6,8 +6,9 @@ import cz.quanti.spacexrockets_janpejsar.spacexapi.services.SpaceXEndpoints
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import javax.inject.Inject
 
-class ProductionSpaceXRepository: SpaceXRepository {
+class ProductionSpaceXRepository @Inject constructor(): SpaceXRepository {
     private val service = SpaceXServiceBuilder.buildService(SpaceXEndpoints::class.java)
 
     override fun getRockets(success: (rockets: List<Rocket>?) -> Unit,
