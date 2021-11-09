@@ -1,6 +1,7 @@
 package cz.quanti.spacexrockets_janpejsar.spacexapi.entities
 
 import com.squareup.moshi.Json
+import java.util.*
 
 data class Rocket(
     @field:Json(name="id")
@@ -20,5 +21,5 @@ data class Rocket(
     @field:Json(name="second_stage")
     val secondStage: Stage,
     @field:Json(name="first_flight")
-    val firstFlight: String
+    val firstFlight: Date
 )

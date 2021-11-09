@@ -30,7 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            android:text="@{rocket.firstFlight}" />
+            app:firstFlight="@{rocket.firstFlight}" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <data>
