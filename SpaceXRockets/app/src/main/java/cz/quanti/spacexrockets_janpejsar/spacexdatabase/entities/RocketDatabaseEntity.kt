@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.Rocket
 import java.util.*
 
-@Entity(tableName = "rocket")
+@Entity(tableName = "rocket_table")
 data class RocketDatabaseEntity(
     @PrimaryKey(autoGenerate = false)
     val id: String,

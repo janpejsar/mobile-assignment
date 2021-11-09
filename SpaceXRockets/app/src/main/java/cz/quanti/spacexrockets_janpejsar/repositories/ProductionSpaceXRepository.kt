@@ -1,6 +1,7 @@
 package cz.quanti.spacexrockets_janpejsar.repositories
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import cz.quanti.spacexrockets_janpejsar.spacexapi.services.SpaceXServiceBuilder
 import cz.quanti.spacexrockets_janpejsar.spacexapi.services.SpaceXEndpoints
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.SpaceXRoomDatabase
@@ -40,16 +41,17 @@ class ProductionSpaceXRepository @Inject constructor(): SpaceXRepository {
         rockets: List<Rocket>
     ) {
         val database = SpaceXRoomDatabase.getDatabase(context)
-        database.rocketDao().insert(rocketToDatabaseEntity(rockets))
-    }
-
-    private fun rocketToDatabaseEntity(rockets: List<Rocket>): List<RocketDatabaseEntity> {
         val dbe = ArrayList<RocketDatabaseEntity>()
 
         rockets.forEach {
             dbe.add(RocketDatabaseEntity(it))
         }
 
-        return dbe
+        database.rocketDao().insert(dbe)
+    }
+
+    override fun getAllRocketsFromDatabase(context: Context): LiveData<List<RocketDatabaseEntity>> {
+        val database = SpaceXRoomDatabase.getDatabase(context)
+        return database.rocketDao().getAll()
     }
 }

@@ -1,52 +1,14 @@
 package cz.quanti.spacexrockets_janpejsar.rocketslist
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
-import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.Rocket
 import cz.quanti.spacexrockets_janpejsar.repositories.SpaceXRepository
+import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketDatabaseEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import java.lang.StringBuilder
 import javax.inject.Inject
 
 @HiltViewModel
-class RocketListViewModel @Inject constructor(application: Application, private val repository: SpaceXRepository): AndroidViewModel(application) {
-    private val _rocketsLiveData = MutableLiveData<List<Rocket>>()
-    val rocketsLiveData: LiveData<List<Rocket>> by ::_rocketsLiveData
-
-    init {
-        repository.getRocketsFromAPI(this::success, this::failure)
-    }
-
-    private fun success(rockets: List<Rocket>?) {
-        Log.i(TAG, "onResponse: Success! :) Got ${rockets?.size} rockets")
-        _rocketsLiveData.value = rockets
-
-        if (rockets != null) {
-            val builder = StringBuilder("Rocket list:")
-            rockets.forEachIndexed { index, rocket -> builder.append("\n${index + 1}.\t${rocket.name}") }
-            Log.i(TAG, "printRockets: $builder")
-
-            viewModelScope.launch(Dispatchers.IO) {
-                repository.saveRocketsToDatabase(
-                    getApplication(),
-                    rockets
-                )
-            }
-        }
-    }
-
-    private fun failure(t: Throwable?) {
-        Log.e(TAG, "failure: Failed", t)
-        _rocketsLiveData.value = null
-    }
-
-    companion object {
-        private const val TAG = "RocketListViewModel"
-    }
+class RocketListViewModel @Inject constructor(application: Application, repository: SpaceXRepository): AndroidViewModel(application) {
+    var rocketsLiveData: LiveData<List<RocketDatabaseEntity>> = repository.getAllRocketsFromDatabase(application)
 }
