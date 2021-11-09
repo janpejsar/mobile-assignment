@@ -5,8 +5,8 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import cz.quanti.spacexrockets_janpejsar.entities.Rocket
-import cz.quanti.spacexrockets_janpejsar.repositories.ProductionSpaceXRepository
+import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.Rocket
+import cz.quanti.spacexrockets_janpejsar.spacexapi.repositories.ProductionSpaceXRepository
 import java.lang.StringBuilder
 
 class RocketListViewModel(application: Application): AndroidViewModel(application) {

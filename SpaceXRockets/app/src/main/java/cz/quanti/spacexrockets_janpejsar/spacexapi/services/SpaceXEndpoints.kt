@@ -1,7 +1,6 @@
-package cz.quanti.spacexrockets_janpejsar.services
+package cz.quanti.spacexrockets_janpejsar.spacexapi.services
 
-import cz.quanti.spacexrockets_janpejsar.entities.Rocket
-import okhttp3.ResponseBody
+import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.Rocket
 import retrofit2.Call
 import retrofit2.http.GET
 

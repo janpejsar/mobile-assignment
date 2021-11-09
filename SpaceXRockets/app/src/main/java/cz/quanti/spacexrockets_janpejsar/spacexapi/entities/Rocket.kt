@@ -1,4 +1,4 @@
-package cz.quanti.spacexrockets_janpejsar.entities
+package cz.quanti.spacexrockets_janpejsar.spacexapi.entities
 
 import com.squareup.moshi.Json
 

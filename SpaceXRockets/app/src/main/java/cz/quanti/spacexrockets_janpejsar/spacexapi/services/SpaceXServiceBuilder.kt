@@ -1,9 +1,9 @@
-package cz.quanti.spacexrockets_janpejsar.services
+package cz.quanti.spacexrockets_janpejsar.spacexapi.services
 
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
-object ServiceBuilder {
+object SpaceXServiceBuilder {
     private val retrofit = Retrofit.Builder()
         .baseUrl("https://api.spacexdata.com/v4/")
         .addConverterFactory(MoshiConverterFactory.create())

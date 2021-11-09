@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.quanti.spacexrockets_janpejsar.R
 import cz.quanti.spacexrockets_janpejsar.databinding.FragmentRocketListBinding
-import cz.quanti.spacexrockets_janpejsar.entities.Rocket
+import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.Rocket
 
 class RocketListFragment: Fragment() {
     private lateinit var binding: FragmentRocketListBinding

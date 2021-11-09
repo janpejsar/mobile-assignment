@@ -1,4 +1,4 @@
-package cz.quanti.spacexrockets_janpejsar.entities
+package cz.quanti.spacexrockets_janpejsar.spacexapi.entities
 
 data class Dimension(
     val meters: Float,
