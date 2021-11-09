@@ -1,7 +1,6 @@
 package cz.quanti.spacexrockets_janpejsar.rocketslist
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,8 +35,6 @@ class RocketListFragment: Fragment() {
         adapter.onItemClickListener = this::showRocketDetail
 
         viewModel.rocketsLiveData.observe(viewLifecycleOwner, {
-            Log.i("TAG", "onCreateView: Submitting ${it?.size} rockets")
-
             val items = ArrayList<RocketItem>()
             it.forEach { rocket: RocketDatabaseEntity -> items.add(RocketItem(rocket)) }
             adapter.submitList(items)
@@ -47,7 +44,11 @@ class RocketListFragment: Fragment() {
     }
 
     private fun showRocketDetail(rocket: RocketItem) {
-        Log.d("TAG", "showRocketDetail: ${rocket.name}")
-        findNavController().navigate(RocketListFragmentDirections.actionRocketListFragmentToRocketDetailFragment(rocket.id))
+        findNavController().navigate(
+            RocketListFragmentDirections.actionRocketListFragmentToRocketDetailFragment(
+                rocketId = rocket.id,
+                rocketName = rocket.name
+            )
+        )
     }
 }

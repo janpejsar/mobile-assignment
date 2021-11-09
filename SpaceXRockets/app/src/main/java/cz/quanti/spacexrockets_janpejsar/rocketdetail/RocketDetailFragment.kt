@@ -25,6 +25,10 @@ class RocketDetailFragment: Fragment() {
     ): View {
         viewModel.loadRocket(args.rocketId)
 
+        if (args.rocketName != null) {
+            requireActivity().title = args.rocketName
+        }
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rocket_detail, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner

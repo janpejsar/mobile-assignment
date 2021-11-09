@@ -35,6 +35,16 @@ class MainActivity : NavigationActivity() {
         return findViewById(R.id.navHost)
     }
 
+    override fun setTitle(title: CharSequence?) {
+        super.setTitle(title)
+        binding.mainToolbar.title = title
+    }
+
+    override fun setTitle(titleId: Int) {
+        super.setTitle(titleId)
+        binding.mainToolbar.setTitle(titleId)
+    }
+
     private fun success(rockets: List<RocketApiEntity>?) {
         Log.i(TAG, "onResponse: Success! :) Got ${rockets?.size} rockets")
 
