@@ -3,7 +3,7 @@ package cz.quanti.spacexrockets_janpejsar.spacexapi.entities
 import com.squareup.moshi.Json
 import java.util.*
 
-data class Rocket(
+data class RocketApiEntity(
     @field:Json(name="id")
     val id: String,
     @field:Json(name="name")
@@ -11,15 +11,15 @@ data class Rocket(
     @field:Json(name="description")
     val description: String,
     @field:Json(name="height")
-    val height: Dimension,
+    val height: DimensionApiEntity,
     @field:Json(name="diameter")
-    val diameter: Dimension,
+    val diameter: DimensionApiEntity,
     @field:Json(name="mass")
-    val mass: Mass,
+    val mass: MassApiEntity,
     @field:Json(name="first_stage")
-    val firstStage: Stage,
+    val firstStage: StageApiEntity,
     @field:Json(name="second_stage")
-    val secondStage: Stage,
+    val secondStage: StageApiEntity,
     @field:Json(name="first_flight")
     val firstFlight: Date
 )

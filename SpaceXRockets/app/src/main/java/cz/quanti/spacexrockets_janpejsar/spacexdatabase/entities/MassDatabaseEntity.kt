@@ -1,12 +1,12 @@
 package cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities
 
-import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.Mass
+import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.MassApiEntity
 
 data class MassDatabaseEntity(
     val kg: Int,
     val lb: Int
 ) {
-    constructor(mass: Mass): this(
+    constructor(mass: MassApiEntity): this(
         mass.kg,
         mass.lb
     )

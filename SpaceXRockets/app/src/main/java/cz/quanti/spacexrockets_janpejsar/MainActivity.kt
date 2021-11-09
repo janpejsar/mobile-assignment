@@ -8,7 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.appbar.MaterialToolbar
 import cz.quanti.spacexrockets_janpejsar.databinding.ActivityMainBinding
 import cz.quanti.spacexrockets_janpejsar.repositories.SpaceXRepository
-import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.Rocket
+import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.RocketApiEntity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -35,7 +35,7 @@ class MainActivity : NavigationActivity() {
         return findViewById(R.id.navHost)
     }
 
-    private fun success(rockets: List<Rocket>?) {
+    private fun success(rockets: List<RocketApiEntity>?) {
         Log.i(TAG, "onResponse: Success! :) Got ${rockets?.size} rockets")
 
         if (rockets != null) {

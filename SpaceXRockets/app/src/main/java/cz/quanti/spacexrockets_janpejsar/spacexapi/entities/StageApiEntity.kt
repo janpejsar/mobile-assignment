@@ -2,7 +2,7 @@ package cz.quanti.spacexrockets_janpejsar.spacexapi.entities
 
 import com.squareup.moshi.Json
 
-data class Stage(
+data class StageApiEntity(
     @field:Json(name="reusable")
     val reusable: Boolean,
     @field:Json(name="engines")

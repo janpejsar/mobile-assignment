@@ -19,5 +19,11 @@
         android:id="@+id/rocketDetailFragment"
         android:name="cz.quanti.spacexrockets_janpejsar.rocketdetail.RocketDetailFragment"
         android:label="@string/fragment_rocket_detail"
-        tools:layout="@layout/fragment_rocket_detail" />
+        tools:layout="@layout/fragment_rocket_detail">
+        <argument
+            android:name="rocketId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>

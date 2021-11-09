@@ -1,7 +1,7 @@
 package cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities
 
 import androidx.room.ColumnInfo
-import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.Stage
+import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.StageApiEntity
 
 data class StageDatabaseEntity(
     val reusable: Boolean,
@@ -11,7 +11,7 @@ data class StageDatabaseEntity(
     @ColumnInfo(name = "burn_time")
     val burnTime: Int?
 ) {
-    constructor(stage: Stage): this(
+    constructor(stage: StageApiEntity): this(
         stage.reusable,
         stage.engines,
         stage.fuelAmount,

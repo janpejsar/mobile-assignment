@@ -26,7 +26,6 @@ class RocketListFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rocket_list, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
@@ -49,6 +48,6 @@ class RocketListFragment: Fragment() {
 
     private fun showRocketDetail(rocket: RocketItem) {
         Log.d("TAG", "showRocketDetail: ${rocket.name}")
-        findNavController().navigate(RocketListFragmentDirections.actionRocketListFragmentToRocketDetailFragment())
+        findNavController().navigate(RocketListFragmentDirections.actionRocketListFragmentToRocketDetailFragment(rocket.id))
     }
 }

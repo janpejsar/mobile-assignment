@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.Rocket
+import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.RocketApiEntity
 import java.util.*
 
 @Entity(tableName = "rocket_table")
@@ -26,7 +26,7 @@ data class RocketDatabaseEntity(
     @ColumnInfo(name = "first_flight")
     val firstFlight: Date
 ) {
-    constructor(rocket: Rocket) : this(
+    constructor(rocket: RocketApiEntity) : this(
         rocket.id,
         rocket.name,
         rocket.description,
