@@ -9,7 +9,11 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class RocketListViewModel @Inject constructor(application: Application, private val repository: SpaceXRepository): AndroidViewModel(application) {
+class RocketListViewModel @Inject constructor(
+    application: Application,
+    private val repository: SpaceXRepository
+): AndroidViewModel(application) {
+
     var rocketsLiveData: LiveData<List<RocketItem>> = mapRocketsToRocketItems()
 
     private fun mapRocketsToRocketItems(): LiveData<List<RocketItem>> {

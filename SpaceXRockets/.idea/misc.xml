@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/drawable/ic_burn.xml" value="0.4453125" />
         <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/drawable/ic_burn_time.xml" value="0.4453125" />
         <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/drawable/ic_engine.xml" value="0.4453125" />
         <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/drawable/ic_fuel.xml" value="0.4453125" />
         <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/drawable/ic_reusable.xml" value="0.4453125" />
+        <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/drawable/ic_rocket.xml" value="0.4453125" />
         <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/layout/activity_main.xml" value="0.365036231884058" />
         <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/layout/fragment_rocket_detail.xml" value="0.3999094202898551" />
         <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/layout/fragment_rocket_list.xml" value="0.23333333333333334" />
