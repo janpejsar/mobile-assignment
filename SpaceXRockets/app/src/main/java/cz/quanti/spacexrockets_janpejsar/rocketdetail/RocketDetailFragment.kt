@@ -1,9 +1,7 @@
 package cz.quanti.spacexrockets_janpejsar.rocketdetail
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -23,6 +21,7 @@ class RocketDetailFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
         viewModel.loadRocket(args.rocketId)
 
         if (args.rocketName != null) {
@@ -34,5 +33,20 @@ class RocketDetailFragment: Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.rocket_detail, menu)
+
+        menu.findItem(R.id.launchMenuItem).setOnMenuItemClickListener {
+            navigateToLaunch()
+            true
+        }
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    private fun navigateToLaunch() {
+
     }
 }

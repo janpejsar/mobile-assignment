@@ -4,6 +4,8 @@
     <string name="fragment_rocket_list">Rockets</string>
     <string name="fragment_rocket_detail">Detail</string>
 
+    <string name="menu_item_launch">Launch</string>
+
     <string name="first_flight">First flight: %s</string>
     <string name="overview">Overview</string>
     <string name="dimension_meters">%dm</string>
