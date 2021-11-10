@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
 import cz.quanti.spacexrockets_janpejsar.R
 import cz.quanti.spacexrockets_janpejsar.databinding.FragmentRocketDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,6 +17,7 @@ class RocketDetailFragment: Fragment() {
     private lateinit var binding: FragmentRocketDetailBinding
     private val viewModel: RocketDetailViewModel by viewModels()
     private val args: RocketDetailFragmentArgs by navArgs()
+    private val adapter = RocketImageAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,6 +34,13 @@ class RocketDetailFragment: Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rocket_detail, container, false)
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+
+        binding.imagesRecyclerView.layoutManager = LinearLayoutManager(binding.root.context)
+        binding.imagesRecyclerView.adapter = adapter
+
+        viewModel.rocketLiveData.observe(viewLifecycleOwner, {
+            adapter.submitList(it?.images)
+        })
 
         return binding.root
     }

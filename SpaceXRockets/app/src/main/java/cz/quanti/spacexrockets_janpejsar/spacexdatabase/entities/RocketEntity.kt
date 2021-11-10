@@ -24,7 +24,9 @@ data class RocketEntity(
     @Embedded(prefix = "second_stage_")
     val secondStage: StageEntity,
     @ColumnInfo(name = "first_flight")
-    val firstFlight: Date
+    val firstFlight: Date,
+    @ColumnInfo(name = "images")
+    val images: List<String>
 ) {
     constructor(rocket: RocketApiEntity) : this(
         rocket.id,
@@ -35,6 +37,7 @@ data class RocketEntity(
         MassEntity(rocket.mass),
         StageEntity(rocket.firstStage),
         StageEntity(rocket.secondStage),
-        rocket.firstFlight
+        rocket.firstFlight,
+        rocket.images
     )
 }

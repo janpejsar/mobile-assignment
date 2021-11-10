@@ -20,6 +20,7 @@ class SpaceXRepositoryModule {
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): SpaceXRoomDatabase {
         return Room.databaseBuilder(context, SpaceXRoomDatabase::class.java, SpaceXRoomDatabase.DATABASE_NAME)
+            .addMigrations(SpaceXRoomDatabase.MIGRATION_1_2)
             .build()
     }
 

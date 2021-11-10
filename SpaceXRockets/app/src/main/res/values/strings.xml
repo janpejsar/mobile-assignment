@@ -28,4 +28,5 @@
     <string name="seconds_burn_time">%d seconds burn time</string>
     <string name="launch_info_move_phone">Move your phone up\nto launch the rocket</string>
     <string name="launch_info_successful">Launch successful!</string>
+    <string name="photos">Photos</string>
 </resources>

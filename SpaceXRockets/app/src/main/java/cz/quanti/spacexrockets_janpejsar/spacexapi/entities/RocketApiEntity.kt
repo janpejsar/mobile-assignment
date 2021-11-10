@@ -21,5 +21,7 @@ data class RocketApiEntity(
     @field:Json(name="second_stage")
     val secondStage: StageApiEntity,
     @field:Json(name="first_flight")
-    val firstFlight: Date
+    val firstFlight: Date,
+    @field:Json(name="flickr_images")
+    val images: List<String>
 )
