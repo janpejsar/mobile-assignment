@@ -12,7 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
-class ProductionSpaceXRepository @Inject constructor(): SpaceXRepository {
+class ProductionSpaceXRepository @Inject constructor(private val database: SpaceXRoomDatabase): SpaceXRepository {
     private val service = SpaceXServiceBuilder.buildService(SpaceXEndpoints::class.java)
 
     override fun getRocketsFromAPI(
@@ -40,12 +40,10 @@ class ProductionSpaceXRepository @Inject constructor(): SpaceXRepository {
         context: Context,
         rockets: List<RocketApiEntity>
     ) {
-        val database = SpaceXRoomDatabase.getDatabase(context)
         database.rocketDao().insert(rockets.map { rocket -> RocketEntity(rocket) })
     }
 
     override fun getSavedRocketsLiveData(context: Context): LiveData<List<RocketEntity>> {
-        val database = SpaceXRoomDatabase.getDatabase(context)
         return database.rocketDao().getAll()
     }
 
@@ -53,7 +51,6 @@ class ProductionSpaceXRepository @Inject constructor(): SpaceXRepository {
         context: Context,
         rocketId: String
     ): LiveData<RocketEntity> {
-        val database = SpaceXRoomDatabase.getDatabase(context)
         return database.rocketDao().get(rocketId)
     }
 }
