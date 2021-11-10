@@ -213,7 +213,7 @@
                         android:drawablePadding="5dp"
                         android:gravity="center_vertical"
                         android:layout_marginTop="5dp"
-                        app:text="@{@plurals/engines_count(viewModel.rocketLiveData.firstStage.engines)}"/>
+                        app:text="@{@plurals/engines_count(viewModel.rocketLiveData.firstStage.engines, viewModel.rocketLiveData.firstStage.engines)}"/>
 
                     <TextView
                         android:layout_width="match_parent"
