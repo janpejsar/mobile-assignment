@@ -26,4 +26,6 @@
     <string name="engines_count">%d engines</string>
     <string name="tons_of_fuel">%.0f tons of fuel</string>
     <string name="seconds_burn_time">%d seconds burn time</string>
+    <string name="launch_info_move_phone">Move your phone up\nto launch the rocket</string>
+    <string name="launch_info_successful">Launch successful!</string>
 </resources>

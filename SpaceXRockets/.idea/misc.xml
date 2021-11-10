@@ -10,6 +10,8 @@
         <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/drawable/ic_navigate_next.xml" value="0.2635416666666667" />
         <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/drawable/ic_reusable.xml" value="0.4453125" />
         <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/drawable/ic_rocket.xml" value="0.4453125" />
+        <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/drawable/rocket_flying.xml" value="0.4453125" />
+        <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/drawable/rocket_idle.xml" value="0.4453125" />
         <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/layout/activity_main.xml" value="0.365036231884058" />
         <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/layout/fragment_rocket_detail.xml" value="0.3999094202898551" />
         <entry key="..\:/Users/Jan Pejsar/StudioProjects/mobile-assignment/SpaceXRockets/app/src/main/res/layout/fragment_rocket_launch.xml" value="0.3917572463768116" />

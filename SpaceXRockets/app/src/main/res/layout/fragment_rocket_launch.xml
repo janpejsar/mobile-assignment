@@ -3,17 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rocketLaunchMainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?colorSurface">
 
-        <TextView
+        <ImageView
+            android:id="@+id/rocketImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/rocket_idle"
             android:text="@string/fragment_rocket_launch" />
+
+        <TextView
+            android:id="@+id/launchInfoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rocketImageView"
+            android:text="@string/launch_info_move_phone"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
