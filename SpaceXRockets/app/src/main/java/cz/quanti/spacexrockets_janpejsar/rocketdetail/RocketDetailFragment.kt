@@ -5,6 +5,7 @@ import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import cz.quanti.spacexrockets_janpejsar.R
 import cz.quanti.spacexrockets_janpejsar.databinding.FragmentRocketDetailBinding
@@ -47,6 +48,6 @@ class RocketDetailFragment: Fragment() {
     }
 
     private fun navigateToLaunch() {
-
+        findNavController().navigate(RocketDetailFragmentDirections.actionRocketDetailFragmentToRocketLaunchFragment())
     }
 }

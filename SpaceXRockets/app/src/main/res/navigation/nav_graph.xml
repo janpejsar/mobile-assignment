@@ -30,5 +30,14 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_rocketDetailFragment_to_rocketLaunchFragment"
+            app:destination="@id/rocketLaunchFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/rocketLaunchFragment"
+        android:name="cz.quanti.spacexrockets_janpejsar.rocketlaunch.RocketLaunchFragment"
+        android:label="@string/fragment_rocket_launch"
+        tools:layout="@layout/fragment_rocket_launch" />
 </navigation>
