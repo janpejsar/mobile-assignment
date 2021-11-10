@@ -2,7 +2,6 @@ package cz.quanti.spacexrockets_janpejsar.repositories
 
 import android.content.Context
 import androidx.lifecycle.LiveData
-import cz.quanti.spacexrockets_janpejsar.spacexapi.services.SpaceXServiceBuilder
 import cz.quanti.spacexrockets_janpejsar.spacexapi.services.SpaceXEndpoints
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.SpaceXRoomDatabase
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.RocketApiEntity
@@ -10,10 +9,11 @@ import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketEntity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import javax.inject.Inject
 
-class ProductionSpaceXRepository @Inject constructor(private val database: SpaceXRoomDatabase): SpaceXRepository {
-    private val service = SpaceXServiceBuilder.buildService(SpaceXEndpoints::class.java)
+class ProductionSpaceXRepository(
+    private val database: SpaceXRoomDatabase,
+    private val service: SpaceXEndpoints
+): SpaceXRepository {
 
     override fun getRocketsFromAPI(
         success: (rockets: List<RocketApiEntity>?) -> Unit,
