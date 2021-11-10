@@ -3,7 +3,7 @@ package cz.quanti.spacexrockets_janpejsar.repositories
 import android.content.Context
 import androidx.lifecycle.LiveData
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.RocketApiEntity
-import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketDatabaseEntity
+import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketEntity
 
 interface SpaceXRepository {
     fun getRocketsFromAPI(
@@ -18,10 +18,10 @@ interface SpaceXRepository {
 
     fun getSavedRocketsLiveData(
         context: Context
-    ): LiveData<List<RocketDatabaseEntity>>
+    ): LiveData<List<RocketEntity>>
 
     fun getRocketFromDatabase(
         context: Context,
         rocketId: String
-    ): LiveData<RocketDatabaseEntity>
+    ): LiveData<RocketEntity>
 }

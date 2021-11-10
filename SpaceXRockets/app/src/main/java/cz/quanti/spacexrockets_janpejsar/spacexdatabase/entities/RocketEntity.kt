@@ -8,21 +8,21 @@ import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.RocketApiEntity
 import java.util.*
 
 @Entity(tableName = "rocket_table")
-data class RocketDatabaseEntity(
+data class RocketEntity(
     @PrimaryKey(autoGenerate = false)
     val id: String,
     val name: String,
     val description: String,
     @Embedded(prefix = "height_")
-    val height: DimensionDatabaseEntity,
+    val height: DimensionEntity,
     @Embedded(prefix = "diameter_")
-    val diameter: DimensionDatabaseEntity,
+    val diameter: DimensionEntity,
     @Embedded(prefix = "mass_")
-    val mass: MassDatabaseEntity,
+    val mass: MassEntity,
     @Embedded(prefix = "first_stage_")
-    val firstStage: StageDatabaseEntity,
+    val firstStage: StageEntity,
     @Embedded(prefix = "second_stage_")
-    val secondStage: StageDatabaseEntity,
+    val secondStage: StageEntity,
     @ColumnInfo(name = "first_flight")
     val firstFlight: Date
 ) {
@@ -30,11 +30,11 @@ data class RocketDatabaseEntity(
         rocket.id,
         rocket.name,
         rocket.description,
-        DimensionDatabaseEntity(rocket.height),
-        DimensionDatabaseEntity(rocket.diameter),
-        MassDatabaseEntity(rocket.mass),
-        StageDatabaseEntity(rocket.firstStage),
-        StageDatabaseEntity(rocket.secondStage),
+        DimensionEntity(rocket.height),
+        DimensionEntity(rocket.diameter),
+        MassEntity(rocket.mass),
+        StageEntity(rocket.firstStage),
+        StageEntity(rocket.secondStage),
         rocket.firstFlight
     )
 }

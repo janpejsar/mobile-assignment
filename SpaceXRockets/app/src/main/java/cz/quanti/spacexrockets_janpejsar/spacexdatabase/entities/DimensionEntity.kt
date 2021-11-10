@@ -2,7 +2,7 @@ package cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities
 
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.DimensionApiEntity
 
-data class DimensionDatabaseEntity(
+data class DimensionEntity(
     val meters: Float,
     val feet: Float
 ) {

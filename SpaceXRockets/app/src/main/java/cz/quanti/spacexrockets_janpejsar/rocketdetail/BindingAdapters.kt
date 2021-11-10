@@ -3,14 +3,14 @@ package cz.quanti.spacexrockets_janpejsar.rocketdetail
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import cz.quanti.spacexrockets_janpejsar.R
-import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.DimensionDatabaseEntity
-import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.MassDatabaseEntity
+import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.DimensionEntity
+import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.MassEntity
 import kotlin.math.roundToInt
 
 object BindingAdapters {
     @BindingAdapter("dimension")
     @JvmStatic
-    fun setDimension(view: TextView, dimension: DimensionDatabaseEntity?) {
+    fun setDimension(view: TextView, dimension: DimensionEntity?) {
         view.text = if (dimension == null) {
             null
         } else {
@@ -23,7 +23,7 @@ object BindingAdapters {
 
     @BindingAdapter("mass")
     @JvmStatic
-    fun setMass(view: TextView, mass: MassDatabaseEntity?) {
+    fun setMass(view: TextView, mass: MassEntity?) {
         view.text = if (mass == null) {
             null
         } else {

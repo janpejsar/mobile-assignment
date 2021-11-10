@@ -3,7 +3,7 @@ package cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities
 import androidx.room.ColumnInfo
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.StageApiEntity
 
-data class StageDatabaseEntity(
+data class StageEntity(
     val reusable: Boolean,
     val engines: Int,
     @ColumnInfo(name = "fuel_amount")

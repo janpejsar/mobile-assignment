@@ -6,7 +6,7 @@ import cz.quanti.spacexrockets_janpejsar.spacexapi.services.SpaceXServiceBuilder
 import cz.quanti.spacexrockets_janpejsar.spacexapi.services.SpaceXEndpoints
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.SpaceXRoomDatabase
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.RocketApiEntity
-import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketDatabaseEntity
+import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketEntity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,16 +41,10 @@ class ProductionSpaceXRepository @Inject constructor(): SpaceXRepository {
         rockets: List<RocketApiEntity>
     ) {
         val database = SpaceXRoomDatabase.getDatabase(context)
-        val dbe = ArrayList<RocketDatabaseEntity>()
-
-        rockets.forEach {
-            dbe.add(RocketDatabaseEntity(it))
-        }
-
-        database.rocketDao().insert(dbe)
+        database.rocketDao().insert(rockets.map { rocket -> RocketEntity(rocket) })
     }
 
-    override fun getSavedRocketsLiveData(context: Context): LiveData<List<RocketDatabaseEntity>> {
+    override fun getSavedRocketsLiveData(context: Context): LiveData<List<RocketEntity>> {
         val database = SpaceXRoomDatabase.getDatabase(context)
         return database.rocketDao().getAll()
     }
@@ -58,7 +52,7 @@ class ProductionSpaceXRepository @Inject constructor(): SpaceXRepository {
     override fun getRocketFromDatabase(
         context: Context,
         rocketId: String
-    ): LiveData<RocketDatabaseEntity> {
+    ): LiveData<RocketEntity> {
         val database = SpaceXRoomDatabase.getDatabase(context)
         return database.rocketDao().get(rocketId)
     }
