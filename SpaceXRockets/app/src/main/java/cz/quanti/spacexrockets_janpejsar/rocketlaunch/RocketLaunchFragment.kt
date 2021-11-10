@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.animation.doOnEnd
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import cz.quanti.spacexrockets_janpejsar.R
@@ -21,7 +22,7 @@ class RocketLaunchFragment: Fragment(), SensorEventListener {
     private lateinit var binding: FragmentRocketLaunchBinding
     private lateinit var sensorManager: SensorManager
     private var launched = false
-    private var wasPutDown = false
+    private var wasPutDown = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,12 +53,22 @@ class RocketLaunchFragment: Fragment(), SensorEventListener {
                 launch()
             } else if (y.absoluteValue < 2) {
                 wasPutDown = true
+
+                if (!launched && binding.rocketImageView.translationY != 0f) {
+                    resetMinigame()
+                }
             }
         }
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
         //Ignore
+    }
+
+    private fun resetMinigame() {
+        binding.rocketImageView.translationY = 0f
+        binding.rocketImageView.setImageResource(R.drawable.rocket_idle)
+        binding.launchInfoTextView.setText(R.string.launch_info_move_phone)
     }
 
     private fun launch() {
@@ -74,6 +85,11 @@ class RocketLaunchFragment: Fragment(), SensorEventListener {
             ObjectAnimator.ofFloat(binding.rocketImageView, "translationY", -moveBy).apply {
                 duration = FLIGHT_LENGTH
                 start()
+
+                doOnEnd {
+                    launched = false
+                    Log.d(TAG, "launch: Flight complete")
+                }
             }
         }
     }
