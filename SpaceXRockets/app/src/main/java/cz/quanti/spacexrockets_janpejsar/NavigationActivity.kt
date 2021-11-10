@@ -23,7 +23,6 @@ abstract class NavigationActivity: AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        Log.d("TAG", "onSupportNavigateUp: Up")
         return NavigationUI.navigateUp(
             getNavController(),
             appBarConfiguration
