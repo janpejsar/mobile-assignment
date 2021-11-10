@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import cz.quanti.spacexrockets_janpejsar.R
 import cz.quanti.spacexrockets_janpejsar.databinding.FragmentRocketListBinding
-import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketDatabaseEntity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,11 +33,7 @@ class RocketListFragment: Fragment() {
 
         adapter.onItemClickListener = this::showRocketDetail
 
-        viewModel.rocketsLiveData.observe(viewLifecycleOwner, {
-            val items = ArrayList<RocketItem>()
-            it.forEach { rocket: RocketDatabaseEntity -> items.add(RocketItem(rocket)) }
-            adapter.submitList(items)
-        })
+        viewModel.rocketsLiveData.observe(viewLifecycleOwner, { adapter.submitList(it) })
 
         return binding.root
     }

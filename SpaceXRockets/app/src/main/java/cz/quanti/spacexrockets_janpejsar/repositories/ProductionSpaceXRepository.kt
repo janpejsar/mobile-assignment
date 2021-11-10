@@ -50,7 +50,7 @@ class ProductionSpaceXRepository @Inject constructor(): SpaceXRepository {
         database.rocketDao().insert(dbe)
     }
 
-    override fun getAllRocketsFromDatabase(context: Context): LiveData<List<RocketDatabaseEntity>> {
+    override fun getSavedRocketsLiveData(context: Context): LiveData<List<RocketDatabaseEntity>> {
         val database = SpaceXRoomDatabase.getDatabase(context)
         return database.rocketDao().getAll()
     }

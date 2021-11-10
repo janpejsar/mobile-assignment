@@ -16,7 +16,7 @@ interface SpaceXRepository {
         rockets: List<RocketApiEntity>
     )
 
-    fun getAllRocketsFromDatabase(
+    fun getSavedRocketsLiveData(
         context: Context
     ): LiveData<List<RocketDatabaseEntity>>
 
