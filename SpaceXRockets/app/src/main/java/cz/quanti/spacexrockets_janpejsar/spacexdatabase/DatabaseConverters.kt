@@ -3,20 +3,19 @@ package cz.quanti.spacexrockets_janpejsar.spacexdatabase
 import androidx.room.TypeConverter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
-import cz.quanti.spacexrockets_janpejsar.fromApiStringDate as TimeUtils_fromApiStringDate
-import cz.quanti.spacexrockets_janpejsar.toApiStringDate as TimeUtils_toApiStringDate
+import cz.quanti.spacexrockets_janpejsar.TimeUtils
 import java.util.*
 import kotlin.collections.ArrayList
 
 class DatabaseConverters {
     @TypeConverter
     fun fromApiStringDate(value: String): Date {
-        return TimeUtils_fromApiStringDate(value)
+        return TimeUtils.fromApiStringDate(value)
     }
 
     @TypeConverter
     fun toApiStringDate(value: Date): String {
-        return TimeUtils_toApiStringDate(value)
+        return TimeUtils.toApiStringDate(value)
     }
 
     @TypeConverter
