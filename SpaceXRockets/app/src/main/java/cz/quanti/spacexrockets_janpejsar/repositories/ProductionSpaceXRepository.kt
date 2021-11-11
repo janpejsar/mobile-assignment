@@ -51,6 +51,6 @@ class ProductionSpaceXRepository(
         context: Context,
         rocketId: String
     ): LiveData<RocketEntity> {
-        return database.rocketDao().get(rocketId)
+        return database.rocketDao().getLiveData(rocketId)
     }
 }

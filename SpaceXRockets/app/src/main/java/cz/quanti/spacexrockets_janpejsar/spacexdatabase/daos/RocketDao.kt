@@ -12,9 +12,15 @@ interface RocketDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(rockets: List<RocketEntity>)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(rocket: RocketEntity)
+
     @Query("SELECT * FROM rocket_table")
     fun getAll(): LiveData<List<RocketEntity>>
 
     @Query("SELECT * FROM rocket_table WHERE id = :rocketId")
-    fun get(rocketId: String): LiveData<RocketEntity>
+    fun get(rocketId: String): RocketEntity
+
+    @Query("SELECT * FROM rocket_table WHERE id = :rocketId")
+    fun getLiveData(rocketId: String): LiveData<RocketEntity>
 }
