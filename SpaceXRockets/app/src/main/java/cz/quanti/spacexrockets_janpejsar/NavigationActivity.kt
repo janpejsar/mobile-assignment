@@ -1,7 +1,7 @@
 package cz.quanti.spacexrockets_janpejsar
 
 import android.os.Bundle
-import android.util.Log
+import android.os.PersistableBundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -18,6 +18,7 @@ abstract class NavigationActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         onCreateBeforeNavigationSetup(savedInstanceState)
+
         appBarConfiguration = AppBarConfiguration.Builder(getNavController().graph).build()
         setupToolbar()
     }
@@ -37,9 +38,10 @@ abstract class NavigationActivity: AppCompatActivity() {
     }
 
     private fun setupToolbar() {
-        NavigationUI.setupWithNavController(getToolbar(), getNavController(), appBarConfiguration)
+        val navController = getNavController()
+        NavigationUI.setupWithNavController(getToolbar(), navController, appBarConfiguration)
         setSupportActionBar(getToolbar())
-        setupActionBarWithNavController(getNavController(), appBarConfiguration)
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     private fun getNavController(): NavController {
