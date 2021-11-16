@@ -22,7 +22,7 @@ class ProductionSpaceXRepository(
         database.rocketDao().insert(rockets)
     }
 
-    override fun getSavedRocketsLiveData(context: Context): Observable<List<RocketEntity>> {
+    override fun getSavedRocketsObservable(context: Context): Observable<List<RocketEntity>> {
         return database.rocketDao().getAllObservable()
     }
 

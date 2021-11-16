@@ -13,7 +13,7 @@ interface SpaceXRepository {
         rockets: List<RocketEntity>
     )
 
-    fun getSavedRocketsLiveData(
+    fun getSavedRocketsObservable(
         context: Context
     ): Observable<List<RocketEntity>>
 

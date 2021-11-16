@@ -45,7 +45,7 @@ class FakeSpaceXRepository(
         }
     }
 
-    override fun getSavedRocketsLiveData(context: Context): LiveData<List<RocketEntity>> {
+    override fun getSavedRocketsObservable(context: Context): LiveData<List<RocketEntity>> {
         return MutableLiveData(databaseList)
     }
 

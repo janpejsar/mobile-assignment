@@ -23,7 +23,7 @@ class RocketListViewModel @Inject constructor(
     }
 
     private fun mapRocketsToRocketItems() {
-        repository.getSavedRocketsLiveData(getApplication())
+        repository.getSavedRocketsObservable(getApplication())
             .map { rockets ->
                 rockets.map { RocketItem(it) }
             }.subscribeOn(Schedulers.io())
