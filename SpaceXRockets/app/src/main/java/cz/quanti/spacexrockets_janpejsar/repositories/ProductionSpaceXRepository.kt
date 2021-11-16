@@ -18,9 +18,9 @@ class ProductionSpaceXRepository(
 
     override fun saveRocketsToDatabase(
         context: Context,
-        rockets: List<RocketApiEntity>
+        rockets: List<RocketEntity>
     ) {
-        database.rocketDao().insert(rockets.map { rocket -> RocketEntity(rocket) })
+        database.rocketDao().insert(rockets)
     }
 
     override fun getSavedRocketsLiveData(context: Context): LiveData<List<RocketEntity>> {

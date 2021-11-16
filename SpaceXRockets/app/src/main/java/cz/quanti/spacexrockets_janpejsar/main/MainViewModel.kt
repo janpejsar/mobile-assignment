@@ -5,6 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import cz.quanti.spacexrockets_janpejsar.Logger
 import cz.quanti.spacexrockets_janpejsar.repositories.SpaceXRepository
+import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.lang.StringBuilder
@@ -21,6 +22,9 @@ class MainViewModel @Inject constructor(
         repository.getRocketsFromAPI()
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
+            .map { rockets ->
+                rockets.map { rocket -> RocketEntity(rocket) }
+            }
             .subscribe { rockets ->
                 val builder = StringBuilder("Rocket list:")
                 rockets.forEachIndexed { index, rocket -> builder.append("\n${index + 1}.\t${rocket.name}") }
