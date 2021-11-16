@@ -58,10 +58,14 @@ class RocketLaunchFragment: Fragment() {
             binding.launchInfoTextView.setText(it)
         }.addTo(subscribers)
         rocketSensor.stateObservable.subscribe {
-            Logger.d("TAG", "setupRocketSensor: $it")
+            Logger.d(TAG, "setupRocketSensor: $it")
             if (it == RocketFlightState.READY) {
                 binding.rocketImageView.translationY = 0F
             }
         }.addTo(subscribers)
+    }
+
+    companion object {
+        private const val TAG = "RocketLaunchFragment"
     }
 }

@@ -16,6 +16,7 @@ import io.reactivex.rxjava3.subjects.PublishSubject
 import java.util.AbstractMap
 import kotlin.math.absoluteValue
 
+//TODO( Odstranit všechna views a přesunout animaci do RocketLaunchFragment )
 class RocketSensor(
     activity: Activity,
     private val imageView: ImageView,
