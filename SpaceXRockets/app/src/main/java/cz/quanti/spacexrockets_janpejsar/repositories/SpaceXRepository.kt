@@ -4,14 +4,12 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.RocketApiEntity
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketEntity
+import io.reactivex.rxjava3.core.Observable
 
 interface SpaceXRepository {
-    fun getRocketsFromAPI(
-        success: (rockets: List<RocketApiEntity>?) -> Unit,
-        failure: (t: Throwable?) -> Unit
-    )
+    fun getRocketsFromAPI(): Observable<List<RocketApiEntity>>
 
-    suspend fun saveRocketsToDatabase(
+    fun saveRocketsToDatabase(
         context: Context,
         rockets: List<RocketApiEntity>
     )

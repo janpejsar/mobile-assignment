@@ -1,15 +1,12 @@
 package cz.quanti.spacexrockets_janpejsar.main
 
 import android.app.Application
-import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import cz.quanti.spacexrockets_janpejsar.Logger
 import cz.quanti.spacexrockets_janpejsar.repositories.SpaceXRepository
-import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.RocketApiEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.lang.StringBuilder
 import javax.inject.Inject
 
@@ -21,28 +18,16 @@ class MainViewModel @Inject constructor(
     val titleLiveData = MutableLiveData<String>()
 
     init {
-        repository.getRocketsFromAPI(this::success, this::failure)
-    }
+        repository.getRocketsFromAPI()
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
+            .subscribe { rockets ->
+                val builder = StringBuilder("Rocket list:")
+                rockets.forEachIndexed { index, rocket -> builder.append("\n${index + 1}.\t${rocket.name}") }
+                Logger.i(TAG, "printRockets:\n$builder")
 
-    private fun success(rockets: List<RocketApiEntity>?) {
-        Log.i(TAG, "onResponse: Success! :) Got ${rockets?.size} rockets")
-
-        if (rockets != null) {
-            val builder = StringBuilder("Rocket list:")
-            rockets.forEachIndexed { index, rocket -> builder.append("\n${index + 1}.\t${rocket.name}") }
-            Log.i(TAG, "printRockets: $builder")
-
-            viewModelScope.launch(Dispatchers.IO) {
-                repository.saveRocketsToDatabase(
-                    getApplication(),
-                    rockets
-                )
+                repository.saveRocketsToDatabase(getApplication(), rockets)
             }
-        }
-    }
-
-    private fun failure(t: Throwable?) {
-        Log.e(TAG, "failure: Failed", t)
     }
 
     companion object {

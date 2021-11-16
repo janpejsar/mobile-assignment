@@ -6,37 +6,17 @@ import cz.quanti.spacexrockets_janpejsar.spacexapi.services.SpaceXEndpoints
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.SpaceXRoomDatabase
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.RocketApiEntity
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketEntity
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.rxjava3.core.Observable
 
 class ProductionSpaceXRepository(
     private val database: SpaceXRoomDatabase,
     private val service: SpaceXEndpoints
 ): SpaceXRepository {
-
-    override fun getRocketsFromAPI(
-        success: (rockets: List<RocketApiEntity>?) -> Unit,
-        failure: (t: Throwable?) -> Unit
-    ) {
-        val call = service.getRockets()
-        call.enqueue(object : Callback<List<RocketApiEntity>> {
-            override fun onResponse(call: Call<List<RocketApiEntity>>, response: Response<List<RocketApiEntity>>) {
-                if (response.isSuccessful) {
-                    val rockets = response.body()
-                    success(rockets)
-                } else {
-                    failure(null)
-                }
-            }
-
-            override fun onFailure(call: Call<List<RocketApiEntity>>, t: Throwable) {
-                failure(t)
-            }
-        })
+    override fun getRocketsFromAPI(): Observable<List<RocketApiEntity>> {
+        return service.getRockets()
     }
 
-    override suspend fun saveRocketsToDatabase(
+    override fun saveRocketsToDatabase(
         context: Context,
         rockets: List<RocketApiEntity>
     ) {
