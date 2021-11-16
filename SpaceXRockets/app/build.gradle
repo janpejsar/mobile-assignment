@@ -86,4 +86,10 @@ dependencies {
 
     //Implementation tests
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+
+    //RxAndroid
+    def rx_version = "3.0.0"
+    implementation "io.reactivex.rxjava3:rxandroid:$rx_version"
+    implementation "io.reactivex.rxjava3:rxkotlin:$rx_version"
+    implementation "io.reactivex.rxjava3:rxjava:$rx_version"
 }
