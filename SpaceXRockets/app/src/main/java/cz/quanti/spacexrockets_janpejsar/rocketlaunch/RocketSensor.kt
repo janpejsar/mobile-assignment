@@ -6,34 +6,47 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
-import android.widget.TextView
 import cz.quanti.spacexrockets_janpejsar.R
+import io.reactivex.rxjava3.core.BackpressureStrategy
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.BehaviorSubject
+import io.reactivex.rxjava3.subjects.PublishSubject
+import java.util.AbstractMap
 import kotlin.math.absoluteValue
 
 class RocketSensor(
     activity: Activity,
     private val imageView: ImageView,
-    private val textView: TextView,
     private val root: View
 ): SensorEventListener {
     private var sensorManager: SensorManager = activity.getSystemService(Context.SENSOR_SERVICE) as SensorManager
-    private var launched = false
-    private var wasPutDown = true
+
+    val stateObservable: BehaviorSubject<RocketFlightState> = BehaviorSubject.create()
+    val imageObservable: BehaviorSubject<Int> = BehaviorSubject.create()
+    val textObservable: BehaviorSubject<Int> = BehaviorSubject.create()
+
+    private val xObservable = PublishSubject.create<Float>()
+
+    init {
+        stateObservable.startWithItem(RocketFlightState.READY)
+        imageObservable.startWithItem(R.drawable.rocket_idle)
+        textObservable.startWithItem(R.string.launch_info_move_phone)
+
+        Observable.combineLatest(stateObservable, xObservable, { state, x ->
+            AbstractMap.SimpleEntry(state, x)
+        }).toFlowable(BackpressureStrategy.DROP)
+            .subscribe {
+                stateOrXChanged(it.key, it.value)
+            }
+
+        stateObservable.onNext(RocketFlightState.READY)
+    }
 
     override fun onSensorChanged(event: SensorEvent?) {
-        event?.values?.get(1)?.let { y ->
-            if (y > 9) {
-                launch()
-            } else if (y.absoluteValue < 2) {
-                wasPutDown = true
-
-                if (!launched && imageView.translationY != 0f) {
-                    resetMinigame()
-                }
-            }
+        event?.values?.get(1)?.let { x ->
+            xObservable.onNext(x)
         }
     }
 
@@ -51,33 +64,36 @@ class RocketSensor(
         sensorManager.unregisterListener(this)
     }
 
-    private fun resetMinigame() {
-        imageView.translationY = 0f
-        imageView.setImageResource(R.drawable.rocket_idle)
-        textView.setText(R.string.launch_info_move_phone)
-    }
-
-    private fun launch() {
-        if (wasPutDown && !launched) {
-            Log.d(TAG, "launch: Launched!")
-
-            launched = true
-            wasPutDown = false
-
-            imageView.setImageResource(R.drawable.rocket_flying)
-            textView.setText(R.string.launch_info_successful)
-
-            val moveBy = root.height / 2f + imageView.height
-
-            RocketAnimation.animate(imageView, FLIGHT_LENGTH, moveBy) {
-                launched = false
-                Log.d(TAG, "launch: Flight complete")
+    private fun stateOrXChanged(state: RocketFlightState, x: Float) {
+        if (x > 9) {
+            if (state == RocketFlightState.READY) {
+                launch()
+            }
+        } else if (x.absoluteValue < 2) {
+            if (state == RocketFlightState.COMPLETE) {
+                resetMinigame()
             }
         }
     }
 
+    private fun resetMinigame() {
+        stateObservable.onNext(RocketFlightState.READY)
+    }
+
+    private fun launch() {
+        stateObservable.onNext(RocketFlightState.FLYING)
+
+        imageObservable.onNext(R.drawable.rocket_flying)
+        textObservable.onNext(R.string.launch_info_successful)
+
+        val moveBy = root.height / 2f + imageView.height
+
+        RocketAnimation.animate(imageView, FLIGHT_LENGTH, moveBy) {
+            stateObservable.onNext(RocketFlightState.COMPLETE)
+        }
+    }
+
     companion object {
-        private const val TAG = "RocketStartSensor"
         private const val FLIGHT_LENGTH = 5000L
     }
 }
