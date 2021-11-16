@@ -1,7 +1,6 @@
 package cz.quanti.spacexrockets_janpejsar.repositories
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import cz.quanti.spacexrockets_janpejsar.spacexapi.services.SpaceXEndpoints
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.SpaceXRoomDatabase
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.RocketApiEntity
@@ -23,14 +22,14 @@ class ProductionSpaceXRepository(
         database.rocketDao().insert(rockets)
     }
 
-    override fun getSavedRocketsLiveData(context: Context): LiveData<List<RocketEntity>> {
-        return database.rocketDao().getAll()
+    override fun getSavedRocketsLiveData(context: Context): Observable<List<RocketEntity>> {
+        return database.rocketDao().getAllObservable()
     }
 
     override fun getRocketFromDatabase(
         context: Context,
         rocketId: String
-    ): LiveData<RocketEntity> {
-        return database.rocketDao().getLiveData(rocketId)
+    ): Observable<RocketEntity> {
+        return database.rocketDao().getObservable(rocketId)
     }
 }

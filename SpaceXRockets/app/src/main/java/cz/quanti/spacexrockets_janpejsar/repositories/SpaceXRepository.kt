@@ -1,7 +1,6 @@
 package cz.quanti.spacexrockets_janpejsar.repositories
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.RocketApiEntity
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketEntity
 import io.reactivex.rxjava3.core.Observable
@@ -16,10 +15,10 @@ interface SpaceXRepository {
 
     fun getSavedRocketsLiveData(
         context: Context
-    ): LiveData<List<RocketEntity>>
+    ): Observable<List<RocketEntity>>
 
     fun getRocketFromDatabase(
         context: Context,
         rocketId: String
-    ): LiveData<RocketEntity>
+    ): Observable<RocketEntity>
 }

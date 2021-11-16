@@ -25,7 +25,6 @@ class RocketDetailFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         setHasOptionsMenu(true)
-        viewModel.loadRocket(args.rocketId)
 
         if (args.rocketName != null) {
             requireActivity().title = args.rocketName
@@ -42,6 +41,7 @@ class RocketDetailFragment: Fragment() {
             adapter.submitList(it?.images)
         })
 
+        viewModel.loadRocket(args.rocketId)
         return binding.root
     }
 

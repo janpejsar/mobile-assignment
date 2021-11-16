@@ -7,15 +7,23 @@ import androidx.lifecycle.MutableLiveData
 import cz.quanti.spacexrockets_janpejsar.repositories.SpaceXRepository
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
 class RocketDetailViewModel @Inject constructor(application: Application, private val repository: SpaceXRepository): AndroidViewModel(application) {
-    var rocketLiveData: LiveData<RocketEntity> = MutableLiveData()
+    private val _rocketLiveData = MutableLiveData<RocketEntity>()
+    val rocketLiveData: LiveData<RocketEntity> by ::_rocketLiveData
 
     fun loadRocket(rocketId: String?) {
         if (rocketId != null) {
-            rocketLiveData = repository.getRocketFromDatabase(getApplication(), rocketId)
+            repository.getRocketFromDatabase(getApplication(), rocketId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    _rocketLiveData.value = it
+                }
         }
     }
 }
