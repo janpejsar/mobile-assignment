@@ -4,9 +4,10 @@ import android.content.Context
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.RocketApiEntity
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketEntity
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 
 interface SpaceXRepository {
-    fun getRocketsFromAPI(): Observable<List<RocketApiEntity>>
+    fun getRocketsFromAPI(): Single<List<RocketApiEntity>>
 
     fun saveRocketsToDatabase(
         context: Context,

@@ -6,12 +6,13 @@ import cz.quanti.spacexrockets_janpejsar.spacexdatabase.SpaceXRoomDatabase
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.RocketApiEntity
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketEntity
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 
 class ProductionSpaceXRepository(
     private val database: SpaceXRoomDatabase,
     private val service: SpaceXEndpoints
 ): SpaceXRepository {
-    override fun getRocketsFromAPI(): Observable<List<RocketApiEntity>> {
+    override fun getRocketsFromAPI(): Single<List<RocketApiEntity>> {
         return service.getRockets()
     }
 
