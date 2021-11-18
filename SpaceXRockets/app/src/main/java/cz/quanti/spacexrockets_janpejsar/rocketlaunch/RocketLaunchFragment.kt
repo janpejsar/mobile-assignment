@@ -50,17 +50,19 @@ class RocketLaunchFragment: Fragment() {
             binding.rocketImageView,
             binding.rocketLaunchMainLayout
         )
-
-        rocketSensor.imageObservable.subscribe {
-            binding.rocketImageView.setImageResource(it)
-        }.addTo(subscribers)
-        rocketSensor.textObservable.subscribe {
-            binding.launchInfoTextView.setText(it)
-        }.addTo(subscribers)
         rocketSensor.stateObservable.subscribe {
-            Logger.d(TAG, "setupRocketSensor: $it")
+            Logger.d(TAG, "Flight state changed to: $it")
+
             if (it == RocketFlightState.READY) {
                 binding.rocketImageView.translationY = 0F
+            }
+
+            if (it == RocketFlightState.READY) {
+                binding.rocketImageView.setImageResource(R.drawable.rocket_idle)
+                binding.launchInfoTextView.setText(R.string.launch_info_move_phone)
+            } else if (it == RocketFlightState.FLYING) {
+                binding.rocketImageView.setImageResource(R.drawable.rocket_flying)
+                binding.launchInfoTextView.setText(R.string.launch_info_successful)
             }
         }.addTo(subscribers)
     }

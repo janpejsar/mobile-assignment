@@ -8,7 +8,6 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.view.View
 import android.widget.ImageView
-import cz.quanti.spacexrockets_janpejsar.R
 import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
@@ -25,15 +24,11 @@ class RocketSensor(
     private var sensorManager: SensorManager = activity.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
     val stateObservable: BehaviorSubject<RocketFlightState> = BehaviorSubject.create()
-    val imageObservable: BehaviorSubject<Int> = BehaviorSubject.create()
-    val textObservable: BehaviorSubject<Int> = BehaviorSubject.create()
 
     private val xObservable = PublishSubject.create<Float>()
 
     init {
         stateObservable.startWithItem(RocketFlightState.READY)
-        imageObservable.startWithItem(R.drawable.rocket_idle)
-        textObservable.startWithItem(R.string.launch_info_move_phone)
 
         Observable.combineLatest(stateObservable, xObservable, { state, x ->
             AbstractMap.SimpleEntry(state, x)
@@ -83,9 +78,6 @@ class RocketSensor(
 
     private fun launch() {
         stateObservable.onNext(RocketFlightState.FLYING)
-
-        imageObservable.onNext(R.drawable.rocket_flying)
-        textObservable.onNext(R.string.launch_info_successful)
 
         val moveBy = root.height / 2f + imageView.height
 
