@@ -54,15 +54,19 @@ class RocketLaunchFragment: Fragment() {
             if (it == RocketFlightState.READY) {
                 binding.rocketImageView.translationY = 0F
             } else if (it == RocketFlightState.FLYING) {
-                val moveBy = binding.root.height / 2f + binding.rocketImageView.height
-
-                RocketAnimation.animate(binding.rocketImageView, moveBy) {
-                    rocketSensor.animationFinished()
-                }
+                startAnimation()
             }
 
             changeImageAndText(it)
         }.addTo(subscribers)
+    }
+
+    private fun startAnimation() {
+        val moveBy = binding.root.height / 2f + binding.rocketImageView.height
+
+        RocketAnimation.animate(binding.rocketImageView, moveBy) {
+            rocketSensor.animationFinished()
+        }
     }
 
     private fun changeImageAndText(state: RocketFlightState) {

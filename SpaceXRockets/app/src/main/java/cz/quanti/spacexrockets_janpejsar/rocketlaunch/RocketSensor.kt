@@ -17,10 +17,9 @@ class RocketSensor(
     activity: Activity
 ): SensorEventListener {
     private var sensorManager: SensorManager = activity.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+    private val xObservable = PublishSubject.create<Float>()
 
     val stateObservable: BehaviorSubject<RocketFlightState> = BehaviorSubject.create()
-
-    private val xObservable = PublishSubject.create<Float>()
 
     init {
         stateObservable.startWithItem(RocketFlightState.READY)
