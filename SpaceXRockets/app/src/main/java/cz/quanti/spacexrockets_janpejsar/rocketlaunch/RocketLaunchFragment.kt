@@ -46,25 +46,33 @@ class RocketLaunchFragment: Fragment() {
 
     private fun setupRocketSensor() {
         rocketSensor = RocketSensor(
-            requireActivity(),
-            binding.rocketImageView,
-            binding.rocketLaunchMainLayout
+            requireActivity()
         )
         rocketSensor.stateObservable.subscribe {
             Logger.d(TAG, "Flight state changed to: $it")
 
             if (it == RocketFlightState.READY) {
                 binding.rocketImageView.translationY = 0F
+            } else if (it == RocketFlightState.FLYING) {
+                val moveBy = binding.root.height / 2f + binding.rocketImageView.height
+
+                RocketAnimation.animate(binding.rocketImageView, moveBy) {
+                    rocketSensor.animationFinished()
+                }
             }
 
-            if (it == RocketFlightState.READY) {
-                binding.rocketImageView.setImageResource(R.drawable.rocket_idle)
-                binding.launchInfoTextView.setText(R.string.launch_info_move_phone)
-            } else if (it == RocketFlightState.FLYING) {
-                binding.rocketImageView.setImageResource(R.drawable.rocket_flying)
-                binding.launchInfoTextView.setText(R.string.launch_info_successful)
-            }
+            changeImageAndText(it)
         }.addTo(subscribers)
+    }
+
+    private fun changeImageAndText(state: RocketFlightState) {
+        if (state == RocketFlightState.READY) {
+            binding.rocketImageView.setImageResource(R.drawable.rocket_idle)
+            binding.launchInfoTextView.setText(R.string.launch_info_move_phone)
+        } else if (state == RocketFlightState.FLYING) {
+            binding.rocketImageView.setImageResource(R.drawable.rocket_flying)
+            binding.launchInfoTextView.setText(R.string.launch_info_successful)
+        }
     }
 
     companion object {

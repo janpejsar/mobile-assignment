@@ -6,8 +6,6 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.view.View
-import android.widget.ImageView
 import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
@@ -15,11 +13,8 @@ import io.reactivex.rxjava3.subjects.PublishSubject
 import java.util.AbstractMap
 import kotlin.math.absoluteValue
 
-//TODO( Odstranit všechna views a přesunout animaci do RocketLaunchFragment )
 class RocketSensor(
-    activity: Activity,
-    private val imageView: ImageView,
-    private val root: View
+    activity: Activity
 ): SensorEventListener {
     private var sensorManager: SensorManager = activity.getSystemService(Context.SENSOR_SERVICE) as SensorManager
 
@@ -60,6 +55,10 @@ class RocketSensor(
         sensorManager.unregisterListener(this)
     }
 
+    fun animationFinished() {
+        stateObservable.onNext(RocketFlightState.COMPLETE)
+    }
+
     private fun stateOrXChanged(state: RocketFlightState, x: Float) {
         if (x > 9) {
             if (state == RocketFlightState.READY) {
@@ -78,15 +77,5 @@ class RocketSensor(
 
     private fun launch() {
         stateObservable.onNext(RocketFlightState.FLYING)
-
-        val moveBy = root.height / 2f + imageView.height
-
-        RocketAnimation.animate(imageView, FLIGHT_LENGTH, moveBy) {
-            stateObservable.onNext(RocketFlightState.COMPLETE)
-        }
-    }
-
-    companion object {
-        private const val FLIGHT_LENGTH = 5000L
     }
 }

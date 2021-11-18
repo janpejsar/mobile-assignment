@@ -5,14 +5,15 @@ import android.view.View
 import androidx.core.animation.doOnEnd
 
 object RocketAnimation {
+    private const val FLIGHT_LENGTH = 5000L
+
     fun animate(
         view: View,
-        duration: Long,
         moveBy: Float,
         doOnEnd: () -> Unit
     ) {
         ObjectAnimator.ofFloat(view, "translationY", -moveBy).apply {
-            this.duration = duration
+            this.duration = FLIGHT_LENGTH
             start()
 
             doOnEnd {
