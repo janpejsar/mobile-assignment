@@ -10,8 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import cz.quanti.spacexrockets_janpejsar.R
 import cz.quanti.spacexrockets_janpejsar.ThemeUtils
 import cz.quanti.spacexrockets_janpejsar.databinding.ItemRocketBinding
+import javax.inject.Inject
 
-class RocketsAdapter: ListAdapter<RocketItem, RocketsAdapter.RocketViewHolder>(DIFF_CALLBACK) {
+class RocketsAdapter @Inject constructor(
+
+): ListAdapter<RocketItem, RocketsAdapter.RocketViewHolder>(DIFF_CALLBACK) {
     var onItemClickListener: ((item: RocketItem) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RocketViewHolder {

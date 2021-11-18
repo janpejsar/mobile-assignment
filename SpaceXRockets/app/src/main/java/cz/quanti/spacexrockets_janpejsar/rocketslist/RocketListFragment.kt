@@ -12,12 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cz.quanti.spacexrockets_janpejsar.R
 import cz.quanti.spacexrockets_janpejsar.databinding.FragmentRocketListBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class RocketListFragment: Fragment() {
+class RocketListFragment @Inject constructor(
+    private val adapter: RocketsAdapter
+): Fragment() {
     private lateinit var binding: FragmentRocketListBinding
     private val viewModel: RocketListViewModel by viewModels()
-    private val adapter = RocketsAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater,
