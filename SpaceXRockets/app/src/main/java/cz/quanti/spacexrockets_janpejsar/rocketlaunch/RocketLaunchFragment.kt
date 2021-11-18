@@ -9,13 +9,15 @@ import androidx.fragment.app.Fragment
 import cz.quanti.spacexrockets_janpejsar.Logger
 import cz.quanti.spacexrockets_janpejsar.R
 import cz.quanti.spacexrockets_janpejsar.databinding.FragmentRocketLaunchBinding
-import cz.quanti.spacexrockets_janpejsar.rocketlaunch.sensors.HardwareRocketSensor
+import cz.quanti.spacexrockets_janpejsar.rocketlaunch.sensors.RocketSensor
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
+import javax.inject.Inject
 
-class RocketLaunchFragment: Fragment() {
+@AndroidEntryPoint
+class RocketLaunchFragment @Inject constructor(private  val rocketSensor: RocketSensor): Fragment() {
     private lateinit var binding: FragmentRocketLaunchBinding
-    private lateinit var rocketSensor: HardwareRocketSensor
     private lateinit var subscribers: CompositeDisposable
 
     override fun onCreateView(
@@ -25,6 +27,7 @@ class RocketLaunchFragment: Fragment() {
     ): View {
         subscribers = CompositeDisposable()
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_rocket_launch, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
 
         setupRocketSensor()
         return binding.root
@@ -32,6 +35,8 @@ class RocketLaunchFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
+
+        Logger.d(TAG, "onResume: ${viewLifecycleOwner.lifecycle.currentState.name}")
         rocketSensor.resume()
     }
 
@@ -46,9 +51,6 @@ class RocketLaunchFragment: Fragment() {
     }
 
     private fun setupRocketSensor() {
-        rocketSensor = HardwareRocketSensor(
-            requireActivity()
-        )
         rocketSensor.getStateObservable().subscribe {
             Logger.d(TAG, "Flight state changed to: $it")
 

@@ -15,9 +15,9 @@ import java.util.AbstractMap
 import kotlin.math.absoluteValue
 
 class HardwareRocketSensor(
-    activity: Activity
+    private val activity: Activity
 ): RocketSensor, SensorEventListener {
-    private var sensorManager: SensorManager = activity.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+    private var sensorManager: SensorManager? = null
     private val xObservable = PublishSubject.create<Float>()
     private val stateObservable: BehaviorSubject<RocketFlightState> = BehaviorSubject.create()
 
@@ -49,17 +49,25 @@ class HardwareRocketSensor(
     }
 
     override fun resume() {
-        sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.also { sensor ->
-            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME)
+        getSensorManager().getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.also { sensor ->
+            getSensorManager().registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME)
         }
     }
 
     override fun pause() {
-        sensorManager.unregisterListener(this)
+        getSensorManager().unregisterListener(this)
     }
 
     override fun animationFinished() {
         stateObservable.onNext(RocketFlightState.COMPLETE)
+    }
+
+    private fun getSensorManager(): SensorManager {
+        if (sensorManager == null) {
+            sensorManager = activity.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        }
+
+        return sensorManager as SensorManager
     }
 
     private fun stateOrXChanged(state: RocketFlightState, x: Float) {
