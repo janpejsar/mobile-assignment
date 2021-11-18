@@ -5,7 +5,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -44,7 +44,9 @@ abstract class NavigationActivity: AppCompatActivity() {
     }
 
     private fun getNavController(): NavController {
-        return Navigation.findNavController(getNavHostFragment())
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHost) as NavHostFragment
+        return navHostFragment.navController
+        //return Navigation.findNavController(getNavHostFragment())
     }
 
     abstract fun getToolbar(): MaterialToolbar
