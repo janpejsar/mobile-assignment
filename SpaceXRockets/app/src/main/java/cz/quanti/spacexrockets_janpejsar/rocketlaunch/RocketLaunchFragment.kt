@@ -9,12 +9,13 @@ import androidx.fragment.app.Fragment
 import cz.quanti.spacexrockets_janpejsar.Logger
 import cz.quanti.spacexrockets_janpejsar.R
 import cz.quanti.spacexrockets_janpejsar.databinding.FragmentRocketLaunchBinding
+import cz.quanti.spacexrockets_janpejsar.rocketlaunch.sensors.HardwareRocketSensor
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.kotlin.addTo
 
 class RocketLaunchFragment: Fragment() {
     private lateinit var binding: FragmentRocketLaunchBinding
-    private lateinit var rocketSensor: RocketSensor
+    private lateinit var rocketSensor: HardwareRocketSensor
     private lateinit var subscribers: CompositeDisposable
 
     override fun onCreateView(
@@ -45,10 +46,10 @@ class RocketLaunchFragment: Fragment() {
     }
 
     private fun setupRocketSensor() {
-        rocketSensor = RocketSensor(
+        rocketSensor = HardwareRocketSensor(
             requireActivity()
         )
-        rocketSensor.stateObservable.subscribe {
+        rocketSensor.getStateObservable().subscribe {
             Logger.d(TAG, "Flight state changed to: $it")
 
             if (it == RocketFlightState.READY) {

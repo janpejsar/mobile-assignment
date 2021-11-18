@@ -1,4 +1,4 @@
-package cz.quanti.spacexrockets_janpejsar.rocketlaunch
+package cz.quanti.spacexrockets_janpejsar.rocketlaunch.sensors
 
 import android.app.Activity
 import android.content.Context
@@ -6,6 +6,7 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import cz.quanti.spacexrockets_janpejsar.rocketlaunch.RocketFlightState
 import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
@@ -13,13 +14,12 @@ import io.reactivex.rxjava3.subjects.PublishSubject
 import java.util.AbstractMap
 import kotlin.math.absoluteValue
 
-class RocketSensor(
+class HardwareRocketSensor(
     activity: Activity
-): SensorEventListener {
+): RocketSensor, SensorEventListener {
     private var sensorManager: SensorManager = activity.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val xObservable = PublishSubject.create<Float>()
-
-    val stateObservable: BehaviorSubject<RocketFlightState> = BehaviorSubject.create()
+    private val stateObservable: BehaviorSubject<RocketFlightState> = BehaviorSubject.create()
 
     init {
         stateObservable.startWithItem(RocketFlightState.READY)
@@ -34,6 +34,10 @@ class RocketSensor(
         stateObservable.onNext(RocketFlightState.READY)
     }
 
+    override fun getStateObservable(): Observable<RocketFlightState> {
+        return stateObservable
+    }
+
     override fun onSensorChanged(event: SensorEvent?) {
         event?.values?.get(1)?.let { x ->
             xObservable.onNext(x)
@@ -44,17 +48,17 @@ class RocketSensor(
         //Ignore
     }
 
-    fun resume() {
+    override fun resume() {
         sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)?.also { sensor ->
             sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME)
         }
     }
 
-    fun pause() {
+    override fun pause() {
         sensorManager.unregisterListener(this)
     }
 
-    fun animationFinished() {
+    override fun animationFinished() {
         stateObservable.onNext(RocketFlightState.COMPLETE)
     }
 
