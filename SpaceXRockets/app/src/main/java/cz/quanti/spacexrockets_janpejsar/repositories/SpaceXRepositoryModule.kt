@@ -38,7 +38,7 @@ class SpaceXRepositoryModule {
 
     @Provides
     @Singleton
-    fun provideRepository(database: SpaceXRoomDatabase, endpoints: SpaceXEndpoints): SpaceXRepository {
-        return ProductionSpaceXRepository(database, endpoints)
+    fun provideRepository(rocketDao: RocketDao, endpoints: SpaceXEndpoints): SpaceXRepository {
+        return ProductionSpaceXRepository(rocketDao, endpoints)
     }
 }
