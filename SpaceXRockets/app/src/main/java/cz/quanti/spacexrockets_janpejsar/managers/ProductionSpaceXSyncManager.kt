@@ -1,4 +1,4 @@
-package cz.quanti.spacexrockets_janpejsar
+package cz.quanti.spacexrockets_janpejsar.managers
 
 import cz.quanti.spacexrockets_janpejsar.repositories.SpaceXRepository
 import cz.quanti.spacexrockets_janpejsar.utils.Logger
@@ -8,10 +8,10 @@ import java.lang.StringBuilder
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class SpaceXSyncManager @Inject constructor(
+class ProductionSpaceXSyncManager @Inject constructor(
     private val repository: SpaceXRepository
-) {
-    fun sync() {
+): SpaceXSyncManager {
+    override fun sync() {
         repository.getRocketsFromAPI()
             .retryWhen { errors: Flowable<Throwable> ->
                 errors.scan(0) { count, error ->

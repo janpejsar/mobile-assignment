@@ -1,6 +1,7 @@
 package cz.quanti.spacexrockets_janpejsar
 
 import android.app.Application
+import cz.quanti.spacexrockets_janpejsar.managers.SpaceXSyncManager
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
