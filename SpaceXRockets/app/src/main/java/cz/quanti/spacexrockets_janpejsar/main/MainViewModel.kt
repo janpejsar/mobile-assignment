@@ -5,7 +5,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import cz.quanti.spacexrockets_janpejsar.Logger
 import cz.quanti.spacexrockets_janpejsar.repositories.SpaceXRepository
-import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketEntity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -29,9 +28,6 @@ class MainViewModel @Inject constructor(
         repository.getRocketsFromAPI()
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.io())
-            .map { rockets ->
-                rockets.map { rocket -> RocketEntity(rocket) }
-            }
             .retryWhen { errors: Flowable<Throwable> ->
                 errors.scan(0) { count, error ->
                     if (count > MAX_RETRIES) {

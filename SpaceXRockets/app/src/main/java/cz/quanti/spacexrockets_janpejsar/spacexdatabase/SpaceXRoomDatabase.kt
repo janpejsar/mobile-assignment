@@ -6,9 +6,9 @@ import androidx.room.TypeConverters
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.daos.RocketDao
-import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketEntity
+import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketDbEntity
 
-@Database(version = 2, entities = [RocketEntity::class], exportSchema = false)
+@Database(version = 2, entities = [RocketDbEntity::class], exportSchema = false)
 @TypeConverters(DatabaseConverters::class)
 abstract class SpaceXRoomDatabase: RoomDatabase() {
     abstract fun rocketDao(): RocketDao

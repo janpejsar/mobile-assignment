@@ -1,7 +1,6 @@
 package cz.quanti.spacexrockets_janpejsar.rocketslist
 
-import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.RocketApiEntity
-import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketEntity
+import cz.quanti.spacexrockets_janpejsar.entities.Rocket
 import java.util.*
 
 data class RocketItem(
@@ -9,13 +8,7 @@ data class RocketItem(
     val name: String,
     val firstFlight: Date
 ) {
-    constructor(rocket: RocketApiEntity): this(
-        rocket.id,
-        rocket.name,
-        rocket.firstFlight
-    )
-
-    constructor(rocket: RocketEntity): this(
+    constructor(rocket: Rocket): this(
         rocket.id,
         rocket.name,
         rocket.firstFlight

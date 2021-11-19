@@ -1,17 +1,22 @@
-package cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities
+package cz.quanti.spacexrockets_janpejsar.entities
 
-import androidx.room.ColumnInfo
 import cz.quanti.spacexrockets_janpejsar.spacexapi.entities.StageApiEntity
+import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.StageDbEntity
 
-data class StageEntity(
+data class Stage(
     val reusable: Boolean,
     val engines: Int,
-    @ColumnInfo(name = "fuel_amount")
     val fuelAmount: Float,
-    @ColumnInfo(name = "burn_time")
     val burnTime: Int?
 ) {
     constructor(stage: StageApiEntity): this(
+        stage.reusable,
+        stage.engines,
+        stage.fuelAmount,
+        stage.burnTime
+    )
+
+    constructor(stage: StageDbEntity): this(
         stage.reusable,
         stage.engines,
         stage.fuelAmount,

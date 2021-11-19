@@ -6,10 +6,10 @@ import androidx.test.core.app.ApplicationProvider.getApplicationContext
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SmallTest
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.SpaceXRoomDatabase
-import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.DimensionEntity
-import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.MassEntity
-import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketEntity
-import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.StageEntity
+import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.DimensionDbEntity
+import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.MassDbEntity
+import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketDbEntity
+import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.StageDbEntity
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
@@ -24,8 +24,8 @@ import org.junit.runner.RunWith
 @SmallTest
 class SpaceXRoomDatabaseTest {
     private lateinit var database: SpaceXRoomDatabase
-    private lateinit var rocket1a: RocketEntity
-    private lateinit var rocket1b: RocketEntity
+    private lateinit var rocket1a: RocketDbEntity
+    private lateinit var rocket1b: RocketDbEntity
     private val date = TimeUtils.fromApiStringDate("2021-11-11")
 
     @get:Rule
@@ -41,27 +41,27 @@ class SpaceXRoomDatabaseTest {
 
     @Before
     fun createRockets() {
-        rocket1a = RocketEntity(
+        rocket1a = RocketDbEntity(
             "a",
             "Rocket 1a",
             "Rocket number 1, variant A",
-            DimensionEntity(10.5f, 100.5f),
-            DimensionEntity(20.5f, 200.5f),
-            MassEntity(1000, 2000),
-            StageEntity(true, 10, 100.5f, 1000),
-            StageEntity(false, 20, 200.5f, 0),
+            DimensionDbEntity(10.5f, 100.5f),
+            DimensionDbEntity(20.5f, 200.5f),
+            MassDbEntity(1000, 2000),
+            StageDbEntity(true, 10, 100.5f, 1000),
+            StageDbEntity(false, 20, 200.5f, 0),
             date,
             listOf("https://imgur.com/DaCfMsj.jpg", "https://imgur.com/azYafd8.jpg")
         )
-        rocket1b = RocketEntity(
+        rocket1b = RocketDbEntity(
             "a",
             "Rocket 1b",
             "Rocket number 1, variant B",
-            DimensionEntity(10.5f, 100.5f),
-            DimensionEntity(20.5f, 200.5f),
-            MassEntity(1000, 2000),
-            StageEntity(true, 10, 100.5f, 1000),
-            StageEntity(false, 20, 200.5f, 0),
+            DimensionDbEntity(10.5f, 100.5f),
+            DimensionDbEntity(20.5f, 200.5f),
+            MassDbEntity(1000, 2000),
+            StageDbEntity(true, 10, 100.5f, 1000),
+            StageDbEntity(false, 20, 200.5f, 0),
             date,
             listOf("https://imgur.com/DaCfMsj.jpg", "https://imgur.com/azYafd8.jpg")
         )

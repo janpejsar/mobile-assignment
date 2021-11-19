@@ -7,8 +7,10 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
 import cz.quanti.spacexrockets_janpejsar.R
-import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.DimensionEntity
-import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.MassEntity
+import cz.quanti.spacexrockets_janpejsar.entities.Dimension
+import cz.quanti.spacexrockets_janpejsar.entities.Mass
+import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.DimensionDbEntity
+import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.MassDbEntity
 import kotlin.math.roundToInt
 
 object BindingAdapters {
@@ -16,7 +18,7 @@ object BindingAdapters {
 
     @BindingAdapter("dimension")
     @JvmStatic
-    fun setDimension(view: TextView, dimension: DimensionEntity?) {
+    fun setDimension(view: TextView, dimension: Dimension?) {
         view.text = if (dimension == null) {
             null
         } else {
@@ -29,7 +31,7 @@ object BindingAdapters {
 
     @BindingAdapter("mass")
     @JvmStatic
-    fun setMass(view: TextView, mass: MassEntity?) {
+    fun setMass(view: TextView, mass: Mass?) {
         view.text = if (mass == null) {
             null
         } else {
