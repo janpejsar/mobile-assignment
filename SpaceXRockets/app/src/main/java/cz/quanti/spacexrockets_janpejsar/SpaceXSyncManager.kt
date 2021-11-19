@@ -1,0 +1,57 @@
+package cz.quanti.spacexrockets_janpejsar
+
+import android.content.Context
+import cz.quanti.spacexrockets_janpejsar.repositories.SpaceXRepository
+import dagger.hilt.android.qualifiers.ApplicationContext
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.kotlin.subscribeBy
+import java.lang.StringBuilder
+import java.util.concurrent.TimeUnit
+import javax.inject.Inject
+
+class SpaceXSyncManager @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val repository: SpaceXRepository
+) {
+    fun sync() {
+        repository.getRocketsFromAPI()
+            .retryWhen { errors: Flowable<Throwable> ->
+                errors.scan(0) { count, error ->
+                    if (count > MAX_RETRIES) {
+                        throw error
+                    }
+
+                    count + 1
+                }.flatMap {
+                    if (it > 0) {
+                        val seconds = it.toLong() * RETRY_SECONDS_MULTIPLIER
+                        Logger.w(TAG, "Error occurred, retrying in $seconds seconds")
+                        Flowable.timer(seconds, TimeUnit.SECONDS)
+                    } else {
+                        Flowable.empty()
+                    }
+                }
+            }
+            .subscribeBy(
+                onSuccess = { rockets ->
+                    val builder = StringBuilder()
+                    rockets.forEachIndexed { index, rocket -> builder.append("\n${index + 1}.\t${rocket.name} (id: ${rocket.id})") }
+                    Logger.i(TAG, "Rockets from API:$builder")
+
+                    repository.saveRocketsToDatabase(context, rockets)
+                        .subscribeBy {
+                            Logger.i(TAG, "Rockets saved to database")
+                        }
+                },
+                onError = {
+                    Logger.e(TAG, "Error occurred while fetching data from API (${it.message})", it)
+                }
+            )
+    }
+
+    companion object {
+        private const val TAG = "SpaceXSyncManager"
+        private const val MAX_RETRIES = 5
+        private const val RETRY_SECONDS_MULTIPLIER = 5
+    }
+}

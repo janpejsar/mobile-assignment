@@ -7,6 +7,7 @@ import cz.quanti.spacexrockets_janpejsar.spacexdatabase.daos.RocketDao
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketDbEntity
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class ProductionSpaceXRepository(
     private val rocketDao: RocketDao,
@@ -17,6 +18,8 @@ class ProductionSpaceXRepository(
             .map {
                 it.map { rocket -> Rocket(rocket) }
             }
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
     }
 
     override fun saveRocketsToDatabase(
