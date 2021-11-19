@@ -1,4 +1,4 @@
-package cz.quanti.spacexrockets_janpejsar
+package cz.quanti.spacexrockets_janpejsar.utils
 
 import android.content.Context
 import androidx.annotation.ColorInt

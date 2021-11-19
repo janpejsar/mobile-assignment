@@ -1,7 +1,7 @@
 package cz.quanti.spacexrockets_janpejsar.spacexapi
 
 import com.squareup.moshi.*
-import cz.quanti.spacexrockets_janpejsar.TimeUtils
+import cz.quanti.spacexrockets_janpejsar.utils.TimeUtils
 import java.util.*
 
 class ApiDateAdapter: JsonAdapter<Date>() {

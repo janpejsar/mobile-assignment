@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import cz.quanti.spacexrockets_janpejsar.Logger
+import cz.quanti.spacexrockets_janpejsar.utils.Logger
 import cz.quanti.spacexrockets_janpejsar.R
 import cz.quanti.spacexrockets_janpejsar.databinding.FragmentRocketLaunchBinding
 import cz.quanti.spacexrockets_janpejsar.rocketlaunch.sensors.RocketSensor

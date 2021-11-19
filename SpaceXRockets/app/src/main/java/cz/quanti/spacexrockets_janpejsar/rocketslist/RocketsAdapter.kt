@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import cz.quanti.spacexrockets_janpejsar.R
-import cz.quanti.spacexrockets_janpejsar.ThemeUtils
+import cz.quanti.spacexrockets_janpejsar.utils.ThemeUtils
 import cz.quanti.spacexrockets_janpejsar.databinding.ItemRocketBinding
 import javax.inject.Inject
 

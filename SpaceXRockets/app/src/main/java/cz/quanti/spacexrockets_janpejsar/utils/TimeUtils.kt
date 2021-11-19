@@ -1,5 +1,5 @@
 @file:JvmName("TimeUtils")
-package cz.quanti.spacexrockets_janpejsar
+package cz.quanti.spacexrockets_janpejsar.utils
 
 import java.text.SimpleDateFormat
 import java.util.*

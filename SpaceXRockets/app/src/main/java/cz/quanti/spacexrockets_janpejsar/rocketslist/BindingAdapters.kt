@@ -3,7 +3,7 @@ package cz.quanti.spacexrockets_janpejsar.rocketslist
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import cz.quanti.spacexrockets_janpejsar.R
-import cz.quanti.spacexrockets_janpejsar.TimeUtils
+import cz.quanti.spacexrockets_janpejsar.utils.TimeUtils
 import java.util.*
 
 object BindingAdapters {

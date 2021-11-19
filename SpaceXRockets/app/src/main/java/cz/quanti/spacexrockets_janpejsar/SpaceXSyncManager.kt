@@ -1,6 +1,7 @@
 package cz.quanti.spacexrockets_janpejsar
 
 import cz.quanti.spacexrockets_janpejsar.repositories.SpaceXRepository
+import cz.quanti.spacexrockets_janpejsar.utils.Logger
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import java.lang.StringBuilder

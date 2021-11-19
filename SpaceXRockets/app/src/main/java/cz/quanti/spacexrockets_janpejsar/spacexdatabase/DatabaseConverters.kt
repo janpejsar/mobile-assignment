@@ -3,7 +3,7 @@ package cz.quanti.spacexrockets_janpejsar.spacexdatabase
 import androidx.room.TypeConverter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
-import cz.quanti.spacexrockets_janpejsar.TimeUtils
+import cz.quanti.spacexrockets_janpejsar.utils.TimeUtils
 import java.util.*
 import kotlin.collections.ArrayList
 
