@@ -32,16 +32,16 @@ class SpaceXSyncManager @Inject constructor(
                     }
                 }
             }
-            .subscribeBy(
-                onSuccess = { rockets ->
-                    val builder = StringBuilder()
-                    rockets.forEachIndexed { index, rocket -> builder.append("\n${index + 1}.\t${rocket.name} (id: ${rocket.id})") }
-                    Logger.i(TAG, "Rockets from API:$builder")
+            .flatMapCompletable { rockets ->
+                val builder = StringBuilder()
+                rockets.forEachIndexed { index, rocket -> builder.append("\n${index + 1}.\t${rocket.name} (id: ${rocket.id})") }
+                Logger.d(TAG, "Rockets from API:$builder")
 
-                    repository.saveRocketsToDatabase(context, rockets)
-                        .subscribeBy {
-                            Logger.i(TAG, "Rockets saved to database")
-                        }
+                repository.saveRocketsToDatabase(context, rockets)
+            }
+            .subscribeBy(
+                onComplete = {
+                     Logger.i(TAG, "Rockets successfully downloaded and saved")
                 },
                 onError = {
                     Logger.e(TAG, "Error occurred while fetching data from API (${it.message})", it)

@@ -5,6 +5,7 @@ import cz.quanti.spacexrockets_janpejsar.entities.Rocket
 import cz.quanti.spacexrockets_janpejsar.spacexapi.services.SpaceXEndpoints
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.daos.RocketDao
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.entities.RocketDbEntity
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -25,8 +26,8 @@ class ProductionSpaceXRepository(
     override fun saveRocketsToDatabase(
         context: Context,
         rockets: List<Rocket>
-    ): Single<Unit> {
-        return Single.fromCallable { rocketDao.insert(rockets.map { RocketDbEntity(it) }) }
+    ): Completable {
+        return Completable.fromCallable { rocketDao.insert(rockets.map { RocketDbEntity(it) }) }
     }
 
     override fun getSavedRocketsObservable(context: Context): Observable<List<Rocket>> {

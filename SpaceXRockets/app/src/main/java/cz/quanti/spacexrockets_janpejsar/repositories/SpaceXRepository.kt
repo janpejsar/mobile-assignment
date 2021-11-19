@@ -2,6 +2,7 @@ package cz.quanti.spacexrockets_janpejsar.repositories
 
 import android.content.Context
 import cz.quanti.spacexrockets_janpejsar.entities.Rocket
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 
@@ -11,7 +12,7 @@ interface SpaceXRepository {
     fun saveRocketsToDatabase(
         context: Context,
         rockets: List<Rocket>
-    ): Single<Unit>
+    ): Completable
 
     fun getSavedRocketsObservable(
         context: Context
