@@ -11,7 +11,7 @@ interface SpaceXRepository {
     fun saveRocketsToDatabase(
         context: Context,
         rockets: List<Rocket>
-    )
+    ): Single<Unit>
 
     fun getSavedRocketsObservable(
         context: Context

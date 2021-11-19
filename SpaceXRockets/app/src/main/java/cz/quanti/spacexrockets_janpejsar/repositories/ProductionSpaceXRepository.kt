@@ -22,8 +22,8 @@ class ProductionSpaceXRepository(
     override fun saveRocketsToDatabase(
         context: Context,
         rockets: List<Rocket>
-    ) {
-        rocketDao.insert(rockets.map { RocketDbEntity(it) })
+    ): Single<Unit> {
+        return Single.fromCallable { rocketDao.insert(rockets.map { RocketDbEntity(it) }) }
     }
 
     override fun getSavedRocketsObservable(context: Context): Observable<List<Rocket>> {

@@ -52,6 +52,9 @@ class MainViewModel @Inject constructor(
                     Logger.i(TAG, "Rockets from API:$builder")
 
                     repository.saveRocketsToDatabase(getApplication(), rockets)
+                        .subscribeBy {
+                            Logger.i(TAG, "Rockets saved to database")
+                        }
                 },
                 onError = {
                     Logger.e(TAG, "Error occurred while fetching data from API (${it.message})", it)
