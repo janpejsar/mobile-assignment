@@ -7,7 +7,6 @@ import androidx.lifecycle.MutableLiveData
 import cz.quanti.spacexrockets_janpejsar.repositories.SpaceXRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,7 +25,7 @@ class RocketListViewModel @Inject constructor(
         repository.getSavedRocketsObservable()
             .map { rockets ->
                 rockets.map { RocketItem(it) }
-            }.subscribeOn(Schedulers.io())
+            }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
                 _rocketsLiveData.value = it

@@ -8,7 +8,6 @@ import cz.quanti.spacexrockets_janpejsar.entities.Rocket
 import cz.quanti.spacexrockets_janpejsar.repositories.SpaceXRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,7 +18,6 @@ class RocketDetailViewModel @Inject constructor(application: Application, privat
     fun loadRocket(rocketId: String?) {
         if (rocketId != null) {
             repository.getRocketFromDatabase(rocketId)
-                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {
                     _rocketLiveData.value = it

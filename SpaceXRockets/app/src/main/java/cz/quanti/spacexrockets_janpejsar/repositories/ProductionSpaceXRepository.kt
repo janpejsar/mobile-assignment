@@ -19,18 +19,19 @@ class ProductionSpaceXRepository(
                 it.map { rocket -> Rocket(rocket) }
             }
             .subscribeOn(Schedulers.io())
-            .observeOn(Schedulers.io())
     }
 
     override fun saveRocketsToDatabase(
         rockets: List<Rocket>
     ): Completable {
         return Completable.fromCallable { rocketDao.insert(rockets.map { RocketDbEntity(it) }) }
+            .subscribeOn(Schedulers.io())
     }
 
     override fun getSavedRocketsObservable(): Observable<List<Rocket>> {
         return rocketDao.getAllObservable()
             .map { it.map { rocket -> Rocket(rocket) } }
+            .subscribeOn(Schedulers.io())
     }
 
     override fun getRocketFromDatabase(
@@ -38,5 +39,6 @@ class ProductionSpaceXRepository(
     ): Observable<Rocket> {
         return rocketDao.getObservable(rocketId)
             .map { Rocket(it) }
+            .subscribeOn(Schedulers.io())
     }
 }
