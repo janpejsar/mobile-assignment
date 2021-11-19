@@ -18,7 +18,7 @@ class RocketDetailViewModel @Inject constructor(application: Application, privat
 
     fun loadRocket(rocketId: String?) {
         if (rocketId != null) {
-            repository.getRocketFromDatabase(getApplication(), rocketId)
+            repository.getRocketFromDatabase(rocketId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {

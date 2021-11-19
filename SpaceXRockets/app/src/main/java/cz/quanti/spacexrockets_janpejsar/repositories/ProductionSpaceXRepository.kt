@@ -1,6 +1,5 @@
 package cz.quanti.spacexrockets_janpejsar.repositories
 
-import android.content.Context
 import cz.quanti.spacexrockets_janpejsar.entities.Rocket
 import cz.quanti.spacexrockets_janpejsar.spacexapi.services.SpaceXEndpoints
 import cz.quanti.spacexrockets_janpejsar.spacexdatabase.daos.RocketDao
@@ -24,19 +23,17 @@ class ProductionSpaceXRepository(
     }
 
     override fun saveRocketsToDatabase(
-        context: Context,
         rockets: List<Rocket>
     ): Completable {
         return Completable.fromCallable { rocketDao.insert(rockets.map { RocketDbEntity(it) }) }
     }
 
-    override fun getSavedRocketsObservable(context: Context): Observable<List<Rocket>> {
+    override fun getSavedRocketsObservable(): Observable<List<Rocket>> {
         return rocketDao.getAllObservable()
             .map { it.map { rocket -> Rocket(rocket) } }
     }
 
     override fun getRocketFromDatabase(
-        context: Context,
         rocketId: String
     ): Observable<Rocket> {
         return rocketDao.getObservable(rocketId)

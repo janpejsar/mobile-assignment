@@ -1,8 +1,6 @@
 package cz.quanti.spacexrockets_janpejsar
 
-import android.content.Context
 import cz.quanti.spacexrockets_janpejsar.repositories.SpaceXRepository
-import dagger.hilt.android.qualifiers.ApplicationContext
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.kotlin.subscribeBy
 import java.lang.StringBuilder
@@ -10,7 +8,6 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class SpaceXSyncManager @Inject constructor(
-    @ApplicationContext private val context: Context,
     private val repository: SpaceXRepository
 ) {
     fun sync() {
@@ -37,7 +34,7 @@ class SpaceXSyncManager @Inject constructor(
                 rockets.forEachIndexed { index, rocket -> builder.append("\n${index + 1}.\t${rocket.name} (id: ${rocket.id})") }
                 Logger.d(TAG, "Rockets from API:$builder")
 
-                repository.saveRocketsToDatabase(context, rockets)
+                repository.saveRocketsToDatabase(rockets)
             }
             .subscribeBy(
                 onComplete = {
